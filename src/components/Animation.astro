@@ -1,0 +1,21 @@
+
+<div class="w-1/2">
+
+    <picture id="animation" class="overflow-hidden"> </picture>
+</div>
+
+<script>
+  import animationData from "@/lib/animationData.json";
+  import Lottie from "lottie-web";
+
+  const container = document.getElementById("animation") as HTMLDivElement;
+  container.style.height = "30px";
+
+  Lottie.loadAnimation({
+    container: container,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ModeToggle";
+import "@/global.css";
+import Header from "@/components/Header.astro";
+import SectionContainer from "@/container/SectionContainer.astro";
+import Hero from "@/components/Hero.astro";
+import Animation from "@/components/Animation.astro";
+import { OrbitingCirclesDemo } from "@/components/Orbital";
+---
+
+<Layout title="Welcome to Astro.">
+  <Header/>
+  <main class="flex flex-col gap-y-56 w-full h-full my-auto py-28">
+    <SectionContainer class=" flex gap-x-10" id="">
+      <Hero/>
+	  <!-- <Animation/> -->
+
+	  <OrbitingCirclesDemo  />
+
+    </SectionContainer>
+  </main>
+</Layout>
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
+</script>

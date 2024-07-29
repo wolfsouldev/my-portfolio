@@ -1,0 +1,50 @@
+---
+const personalImageAlt = "Miguel Ángel";
+import { StarsBackground } from "@/container/Stars-background";
+import { FlipWords } from "./ui/flip-words";
+import { ShootingStars } from "./ui/shooting-stars";
+import { Button } from "./ui/button";
+import { ArrowUpToLine, Linkedin } from "lucide-react";
+
+const flipWordsArr = ["Desarollador Backend", "Desarrollador Frontend"];
+---
+
+<div class="max-w-xl">
+  <div class="flex gap-4 mb-4">
+    <img
+      class="rounded-full shadow-lg size-16"
+      src="/me.jpg"
+      alt={personalImageAlt}
+    />
+    <a
+      href="https://linkedin.com/in/midudev"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center transition md:justify-center md:hover:scale-105"
+    >
+      <!-- <Badge variant={"secondary"} className="p-2 border-green-500 shadow-lg"
+        >Disponible para trabajar</Badge
+      > -->
+    </a>
+  </div>
+  <h1
+    class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
+  >
+    Hey, soy Alejandro
+  </h1>
+  <!-- <span class="mt-3 text-lg">
+    <FlipWords words={flipWordsArr} client:load className="mt-3 "/>
+  </span> -->
+  <p
+    class="mt-3 text-xl text-gray-800 dark:[&>strong]:text-orange-300 [&>strong]:text-orange-500 [&>strong]:font-semibold dark:text-gray-300"
+  >
+    <strong>Ingeniero de Software </strong> de Cuba. Especializado en el desarrollo
+    de aplicaciones web únicas
+  </p>
+  <nav class="flex flex-wrap gap-4 mt-8"></nav>
+
+  <aside>
+    <Button className="rounded-3xl "><ArrowUpToLine />Contactame </Button>
+    <Button><Linkedin />Linkedin </Button>
+  </aside>
+</div>
