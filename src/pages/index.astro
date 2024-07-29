@@ -11,12 +11,13 @@ import { OrbitingCirclesDemo } from "@/components/Orbital";
 import Experience from "@/components/Experience.astro";
 import AboutMe from "@/components/AboutMe.astro";
 import Skills from "@/components/Skills.astro";
+import Star from "@/container/Satrs.astro";
 ---
 
 <Layout title="Welcome to Astro.">
   <Header />
-  <main class="flex flex-col gap-y-10 w-full h-full my-auto py-32">
-
+  <main class="flex flex-col gap-y-10 w-full h-full my-auto py-32 overflow-x-hidden">
+    <Star client:load />
     <SectionContainer class="flex gap-x-15 justify-center items-center" id="">
       <Hero />
       <OrbitingCirclesDemo>
@@ -35,7 +36,6 @@ import Skills from "@/components/Skills.astro";
     <SectionContainer id="sobre-mi">
       <AboutMe />
     </SectionContainer>
-    
   </main>
 </Layout>
 
