@@ -11,7 +11,7 @@ export function OrbitingCirclesDemo({ children }: Props) {
 
   
   return (
-    <div className="relative flex h-[80vh] w-full flex-col items-center justify-center  rounded-lg  bg-background ">
+    <div className="relative flex h-[80vh] w-full flex-col items-center justify-center  rounded-lg ">
       <span className="pointer-events-none whitespace-pre-wrap flex justify-center items-center pb-14 pr-4 ">
         {children}
       </span>
