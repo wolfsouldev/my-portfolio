@@ -1,0 +1,39 @@
+---
+import { Briefcase } from "lucide-react";
+import ExperienceItem from "./ExperienceItem.astro";
+const EXPERIENCIE = [
+  {
+    date: "Septiembre 2023-2024",
+    title: "Full-Stack Engineer",
+    company: "Tecopos",
+    description:
+      "Desarollador Full-Stack en donde desempelle papel del desarollo y restrcturacion de la arquitectura del sistema a microservicos actualizadno el proyecto legacy.",
+  },
+  {
+    date: "Octubre 2021-2022",
+    title: "Principal Backend Engineer",
+    company: "UNE Mtz",
+    description:
+      "Responsable de la creacion y manteniemneto del sistema informatico priciapal de la empresa.Implantación de medidas de integración continua y despliegue con A/B testing y automatizacion de proceso liderando 2 equipos de desarollo.",
+  },
+];
+---
+
+<div>
+  <h2
+    class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
+  >
+    <Briefcase className="size-8" />
+    Experiencia laboral
+  </h2>
+
+  <ol class="relative mt-16">
+    {
+      EXPERIENCIE.map((experiencie) => (
+        <li class="">
+          <ExperienceItem {...experiencie} />
+        </li>
+      ))
+    }
+  </ol>
+</div>
