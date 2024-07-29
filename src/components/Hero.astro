@@ -1,20 +1,26 @@
 ---
-const personalImageAlt = "Miguel Ángel";
+const personalImageAlt = "Alejandro Fajardo";
+import { AnimatedTooltip } from "./ui/animated-tooltip";
 import { Button } from "./ui/button";
 import { FlipWords } from "./ui/flip-words";
-import TypingAnimation from "./ui/typing-animation";
 import { Contact, Linkedin } from "lucide-react";
 
 const flipWordsArr = ["Backend", "Frontend"];
+
+const people = [
+  {
+    id: 1,
+    name: "Alejandro",
+    designation: "Software Engineer",
+    image: "/me.jpg",
+  },
+];
 ---
 
-<div class="max-w-3xl">
+<div class="max-w-4xl">
   <div class="flex gap-4 mb-4 pt-16">
-    <img
-      class="rounded-full shadow-lg size-16"
-      src="/me.jpg"
-      alt={personalImageAlt}
-    />
+    <AnimatedTooltip items={people} client:load />
+
     <a
       href="https://linkedin.com/in/midudev"
       target="_blank"
@@ -27,22 +33,22 @@ const flipWordsArr = ["Backend", "Frontend"];
     </a>
   </div>
   <h1
-    class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
+    class="text-3xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
   >
     Hey, soy Alejandro
   </h1>
-  <span class="mt-3 text-xl text-orange-500 font-semibold">
+  <span class="mt-3 text-xl text-orange-500 font-bold">
     Desarollador
     <FlipWords
       words={flipWordsArr}
       client:load
-      className="mt-3 text-lg text-orange-500 -ml-2 "
+      className="mt-3 text-xl  -ml-2 "
       duration={5000}
     />
   </span>
   <!-- <TypingAnimation text="Desarrollador Backend" client:load className="-ml-12"   /> -->
   <p
-    class="mt-3 text-xl text-gray-800 dark:[&>strong]:text-orange-300 [&>strong]:text-orange-500 [&>strong]:font-semibold dark:text-gray-300"
+    class="mt-3 text-xl text-gray-800 dark:[&>strong]:text-orange-500 [&>strong]:text-orange-500 [&>strong]:font-semibold dark:text-gray-300"
   >
     <strong>Ingeniero de Software </strong> de Cuba. Especializado en el desarrollo
     de aplicaciones web únicas
@@ -51,14 +57,16 @@ const flipWordsArr = ["Backend", "Frontend"];
 
   <aside>
     <Button className="rounded-3xl group"
-      ><Contact className="mr-2 group-hover:-translate-y-1 transform duration-200 " />Contactame
+      ><Contact
+        className="mr-2 group-hover:-translate-y-1 transform duration-200 "
+      />Contactame
     </Button>
     <Button className="rounded-3xl group group-hover:text-orange-500"
-      ><Linkedin className="mr-2 group-hover:-translate-y-1 transform duration-200 " />Linkedin
+      ><Linkedin
+        className="mr-2 group-hover:-translate-y-1 transform duration-200 "
+      />Linkedin
     </Button>
   </aside>
 </div>
 
-<style is:inline>
-
-</style>
+<style is:inline></style>
