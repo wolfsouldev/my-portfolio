@@ -1,7 +1,82 @@
 ---
+import { Brain, SkullIcon } from "lucide-react";
+import { Badge } from "./ui/badge";
 
+const skills = [
+  {
+    name: "Typescript",
+    icon: "",
+  },
+  {
+    name: "Tailwind",
+    icon: "",
+  },
+  {
+    name: "NodeJs",
+    icon: "",
+  },
+  {
+    name: "Express",
+    icon: "",
+  },
+  {
+    name: "NestJs",
+    icon: "",
+  },
+  {
+    name: "React",
+    icon: "",
+  },
+  {
+    name: "Next",
+    icon: "",
+  },
+  {
+    name: "Astro",
+    icon: "",
+  },
+  {
+    name: "Github",
+    icon: "",
+  },
+  {
+    name: "Postgres",
+    icon: "",
+  },
+  {
+    name: "MongoDB",
+    icon: "",
+  },
+  {
+    name: "MySql",
+    icon: "",
+  },
+  {
+    name: "Redis",
+    icon: "",
+  },
+  {
+    name: "Dcoker",
+    icon: "",
+  },
+];
 ---
 
 <div>
+  <h2
+    class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white "
+  >
+    <Brain className="size-8" />
+    Tecnologias
+  </h2>
 
+  <ul class="flex gap-x-1 gap-y-2 flex-wrap">
+    {
+      skills.map((skill) => (
+        <li class=" cursor-default">
+          <Badge className="text-sm" >{skill.name}</Badge>
+        </li>
+      ))
+    }
+  </ul>
 </div>
