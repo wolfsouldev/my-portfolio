@@ -143,8 +143,8 @@ const Icons = {
           gradientTransform="scale(.1)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#000014" />
-          <stop offset="1" stop-color="#150426" />
+          <stop offset="0" stopColor="#000014" />
+          <stop offset="1" stopColor="#150426" />
         </linearGradient>
         <linearGradient
           id="IconifyId190ff83024861c2431"
@@ -155,8 +155,8 @@ const Icons = {
           gradientTransform="scale(.1)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#ff1639" />
-          <stop offset="1" stop-color="#ff1639" stop-opacity="0" />
+          <stop offset="0" stopColor="#ff1639" />
+          <stop offset="1" stopColor="#ff1639" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path
@@ -174,6 +174,6 @@ const Icons = {
     </svg>
   ),
   tailwind: () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="212.78" height="128" viewBox="0 0 256 154"><defs><linearGradient id="IconifyId190ff83024861c2434" x1="-2.778%" x2="100%" y1="32%" y2="67.556%"><stop offset="0%" stop-color="#2298BD"/><stop offset="100%" stop-color="#0ED7B5"/></linearGradient></defs><path fill="url(#IconifyId190ff83024861c2434)" d="M128 0Q76.8 0 64 51.2Q83.2 25.6 108.8 32c9.737 2.434 16.697 9.499 24.401 17.318C145.751 62.057 160.275 76.8 192 76.8q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C174.249 14.743 159.725 0 128 0M64 76.8q-51.2 0-64 51.2q19.2-25.6 44.8-19.2c9.737 2.434 16.697 9.499 24.401 17.318C81.751 138.857 96.275 153.6 128 153.6q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C110.249 91.543 95.725 76.8 64 76.8"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="212.78" height="128" viewBox="0 0 256 154"><defs><linearGradient id="IconifyId190ff83024861c2434" x1="-2.778%" x2="100%" y1="32%" y2="67.556%"><stop offset="0%" stopColor="#2298BD"/><stop offset="100%" stopColor="#0ED7B5"/></linearGradient></defs><path fill="url(#IconifyId190ff83024861c2434)" d="M128 0Q76.8 0 64 51.2Q83.2 25.6 108.8 32c9.737 2.434 16.697 9.499 24.401 17.318C145.751 62.057 160.275 76.8 192 76.8q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C174.249 14.743 159.725 0 128 0M64 76.8q-51.2 0-64 51.2q19.2-25.6 44.8-19.2c9.737 2.434 16.697 9.499 24.401 17.318C81.751 138.857 96.275 153.6 128 153.6q51.2 0 64-51.2q-19.2 25.6-44.8 19.2c-9.737-2.434-16.697-9.499-24.401-17.318C110.249 91.543 95.725 76.8 64 76.8"/></svg>
   ),
 };
