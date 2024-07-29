@@ -11,14 +11,14 @@ import { OrbitingCirclesDemo } from "@/components/Orbital";
 ---
 
 <Layout title="Welcome to Astro.">
-  <Header/>
+  <Header />
   <main class="flex flex-col gap-y-56 w-full h-full my-auto py-28">
-    <SectionContainer class=" flex gap-x-10" id="">
-      <Hero/>
-	  <!-- <Animation/> -->
+    <SectionContainer class="flex gap-x-10" id="">
+      <Hero />
 
-	  <OrbitingCirclesDemo  />
-
+      <OrbitingCirclesDemo >
+        <Animation client:load/>
+      </OrbitingCirclesDemo>
     </SectionContainer>
   </main>
 </Layout>
