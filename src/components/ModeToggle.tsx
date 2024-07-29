@@ -19,18 +19,26 @@ export function ModeToggle() {
     setThemeState(isDarkMode ? "dark" : "theme-light");
   }, []);
 
+  const switchTheme = (isDark: boolean) => {
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+  };
+
   React.useEffect(() => {
     const isDark =
       theme === "dark" ||
       (theme === "system" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+    //@ts-ignore
+    if (!document.startViewTransition) switchTheme(isDark);
+    //@ts-ignore
+    document.startViewTransition(switchTheme(isDark));
   }, [theme]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="ghost" size="icon" className="border-none bg-transparent focus:border-none active:border-none focus:ring-0 focus-visible:border-none">
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
