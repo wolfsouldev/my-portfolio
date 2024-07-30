@@ -18,7 +18,7 @@ const people = [
 ---
 
 <div class="max-w-4xl mb-12">
-  <div class="flex gap-4 mb-4 ">
+  <div class="flex gap-4 mb-4">
     <AnimatedTooltip items={people} client:load />
 
     <a
@@ -55,16 +55,18 @@ const people = [
   </p>
   <nav class="flex flex-wrap gap-4 mt-8"></nav>
 
-  <aside>
+  <aside class="relative z-40">
     <Button className="rounded-3xl group"
       ><Contact
-        className="mr-2 group-hover:-translate-y-1 transform duration-200 "
-      />Contactame
+        className="mr-2 group-hover:-translate-y-1 transform  group-hover:text-orange-500 duration-200 "
+      />
+      <a href="/" class="" target="_blank"> Contactame </a>
     </Button>
     <Button className="rounded-3xl group group-hover:text-orange-500"
       ><Linkedin
-        className="mr-2 group-hover:-translate-y-1 transform duration-200 "
-      />Linkedin
+        className="mr-2 group-hover:-translate-y-1 transform group-hover:text-blue-500 duration-200"
+      />
+      <a href="https://www.linkedin.com/in/alejandro-fajardo-1548a0245/" target="_blank"> Linkedin </a>
     </Button>
   </aside>
 </div>
