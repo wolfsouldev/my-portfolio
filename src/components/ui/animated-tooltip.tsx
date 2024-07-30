@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   motion,
   useTransform,
@@ -6,8 +6,6 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { Image } from "astro:assets";
-import { Github } from "lucide-react";
 
 export const AnimatedTooltip = ({
   items,
