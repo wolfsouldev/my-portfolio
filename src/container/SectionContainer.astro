@@ -1,11 +1,22 @@
 ---
+import { motion } from "framer-motion";
 const { class: className, id } = Astro.props;
 ---
 
-<section
+<motion.section
   id={id}
   data-section={id}
-  class={`section ${className} w-full mx-auto container lg:max-w-5xl md:max-w-3xl`}
+  className={`section ${className} w-full mx-auto container lg:max-w-5xl md:max-w-3xl`}
+  initial={{ opacity: 0, y: 20, scale: 0.9, rotate: -2 }}
+  whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+  transition={{
+    type: "spring",
+    stiffness: 70,
+    damping: 15,
+    delay: 0.2,
+  }}
+   viewport={{ once: true }}
+  client:load
 >
   <slot />
-</section>
+</motion.section>
