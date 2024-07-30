@@ -10,6 +10,7 @@ import Experience from "@/components/Experience.astro";
 import AboutMe from "@/components/AboutMe.astro";
 import Skills from "@/components/Skills.astro";
 import Star from "@/container/Satrs.astro";
+import Proyects from "@/components/Proyects.astro";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -34,11 +35,15 @@ import Star from "@/container/Satrs.astro";
     <SectionContainer id="sobre-mi">
       <AboutMe />
     </SectionContainer>
+    <SectionContainer id="sobre-mi">
+      <Proyects client:load />
+    </SectionContainer>
   </main>
 </Layout>
 
-<!-- <script is:inline>
+<script is:inline >
   const getThemePreference = () => {
+	localStorage.setItem("theme","dark");
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
     }
@@ -59,7 +64,7 @@ import Star from "@/container/Satrs.astro";
       attributeFilter: ["class"],
     });
   }
-</script> -->
+</script>
 
 
 <!-- <style is:global>

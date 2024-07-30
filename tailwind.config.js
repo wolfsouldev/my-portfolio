@@ -75,13 +75,31 @@ export const theme = {
     keyframes: {
       orbit: {
         "0%": {
-          transform: "rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)",
+          transform:
+            "rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)",
         },
         "100%": {
-          transform: "rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)",
+          transform:
+            "rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)",
         },
       },
     },
+    plugins: {
+      addVariablesForColors,
+    },
   },
 };
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+
 export const plugins = [require("tailwindcss-animate")];
