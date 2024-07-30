@@ -10,7 +10,7 @@ import Experience from "@/components/Experience.astro";
 import AboutMe from "@/components/AboutMe.astro";
 import Skills from "@/components/Skills.astro";
 import Star from "@/container/Satrs.astro";
-import Proyects from "@/components/Proyects.astro";
+import Scroll from '@/components/ScrollAnimation ';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -35,9 +35,12 @@ import Proyects from "@/components/Proyects.astro";
     <SectionContainer id="sobre-mi">
       <AboutMe />
     </SectionContainer>
-    <SectionContainer id="sobre-mi">
+
+    <!-- <SectionContainer id="sobre-mi">
       <Proyects client:load />
-    </SectionContainer>
+    </SectionContainer> -->
+
+    
   </main>
 </Layout>
 
