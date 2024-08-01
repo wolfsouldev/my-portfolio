@@ -1,30 +1,36 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CodeXml, GitBranchPlus, Github, Link, TentIcon } from "lucide-react";
+import { CodeXml, Github, Link, TentIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { GitHub } from "./icons/TechIcon";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
 
 const PATH_ICON = "/icon/";
 
 const PROJECT = [
   {
-    imgURl: "/img/Guarderia.jpg",
+    imgURl: ["/img/Guarderia.jpg"],
     title: "Guardi Yami",
     desc: "Guardi Yami es un sistema integral de gestión y administración diseñado específicamente para una guardería infantil. El proyecto abarca tanto el diseño de la identidad visual como la creación de un sitio web interactivo y funcional. Mi responsabilidad principal en este proyecto incluyó el desarrollo completo del frontend y backend, asegurando una experiencia de usuario intuitiva y una gestión de datos eficiente.",
     link: "",
     demo: "",
-    tech: ["react", "typescript", "tailwind", "nest", "postgres",'jest'],
+    tech: ["react", "typescript", "tailwind", "nest", "postgres", "jest"],
   },
   {
-    imgURl: "/img/tv.webp",
+    imgURl: ["/img/tv.webp"],
     title: "Tv Tecopos",
     desc: "Tv Tecopos es una plataforma web diseñada para televisores, que permite la promoción dinámica de productos a través de transiciones visualmente atractivas. Esta aplicación está vinculada a un sistema de administración web que facilita el control y la actualización de los contenidos mostrados en tiempo real. La solución está orientada a mejorar la experiencia de marketing visual en entornos de retail y otros espacios comerciales.",
     link: "",
     demo: "https://tv.tecopos.com/",
-    tech: ["react", "typescript","express"],
+    tech: ["react", "framer-motion", "typescript", "express", "jest"],
   },
   {
-    imgURl: "/img/spacex.jpg",
+    imgURl: ["/img/spacex.jpg"],
     title: "Space-X-Demo",
     desc: "Space-X-Demo es una web demo desarrollada. Este proyecto tiene como objetivo probar las transiciones de vista (view transitions) y mostrar información en tiempo real sobre los lanzamientos de SpaceX, utilizando su API pública. La aplicación proporciona una experiencia de usuario fluida y atractiva, permitiendo explorar datos detallados sobre misiones espaciales, cohetes y fechas de lanzamiento.",
     link: "https://github.com/wolfsoul01/SpaceX_launches_ViewTransitions",
@@ -32,14 +38,13 @@ const PROJECT = [
     tech: ["astroWithe", "typescript", "tailwind"],
   },
   {
-    imgURl: "/img/0_X.jpg",
+    imgURl: ["/img/0_X.jpg"],
     title: "Tic Tac Toe ",
     desc: "Este es un simple juego de Tic Tac Toe desarrollado en React. ¡Diviértete jugando con un amigo!",
     link: "https://github.com/wolfsoul01/Tic_Tac_Toe",
     demo: "",
     tech: ["react", "typescript"],
   },
- 
 ];
 
 export const TextParallaxContentExample = () => {
@@ -61,7 +66,13 @@ export const TextParallaxContentExample = () => {
               subheading={item.tech}
               heading={item.title}
             >
-              <ProjectDesc desc={item.desc} subText={""} title={item.title} demo={item.demo} link={item.link} />
+              <ProjectDesc
+                desc={item.desc}
+                subText={""}
+                title={item.title}
+                demo={item.demo}
+                link={item.link}
+              />
             </TextParallaxContent>
           </article>
         ))}
@@ -73,7 +84,7 @@ export const TextParallaxContentExample = () => {
 const IMG_PADDING = 12;
 
 interface TextParallaxContentProps {
-  imgUrl: string;
+  imgUrl: string[];
   subheading: string[];
   heading: string;
   children: React.ReactElement;
@@ -100,7 +111,7 @@ const TextParallaxContent = ({
   );
 };
 
-const StickyImage = ({ imgUrl }: { imgUrl: string }) => {
+const StickyImage = ({ imgUrl }: { imgUrl: string[] }) => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -109,27 +120,43 @@ const StickyImage = ({ imgUrl }: { imgUrl: string }) => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
+  const isPaginated = imgUrl.length > 1;
   return (
-    <motion.div
-      style={{
-        backgroundImage: `url(${imgUrl})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: `calc(100vh - ${IMG_PADDING * 2}px)`,
-        top: IMG_PADDING,
-        scale,
+    <Carousel
+      opts={{
+        align: "start",
       }}
-      ref={targetRef}
-      className="sticky z-0 overflow-hidden rounded-3xl"
     >
-      <motion.div
-        className="absolute inset-0 bg-neutral-950/70"
-        style={{
-          opacity,
-        }}
-      />
-    </motion.div>
+      <CarouselContent>
+        {imgUrl.map((item) => {
+          return (
+            <CarouselItem className="">
+              <motion.div
+                style={{
+                  backgroundImage: `url(${item})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: `calc(100vh - ${IMG_PADDING * 2}px)`,
+                  top: IMG_PADDING,
+                  scale,
+                }}
+                ref={targetRef}
+                className="sticky z-0 overflow-hidden rounded-3xl"
+              >
+                <motion.div
+                  className="absolute inset-0 bg-neutral-950/70"
+                  style={{
+                    opacity,
+                  }}
+                />
+              </motion.div>
+            </CarouselItem>
+          );
+        })}
+      </CarouselContent>
+      {isPaginated && <CarouselPrevious />}
+      {isPaginated && <CarouselNext />}
+    </Carousel>
   );
 };
 
@@ -164,6 +191,7 @@ const OverlayCopy = ({
       <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2">
         {subheading.map((item) => (
           <img
+            key={item}
             className="w-12 hover:rotate-1"
             src={`${PATH_ICON}${item}.svg`}
           />
@@ -187,33 +215,50 @@ const ProjectDesc = ({
   title,
   link,
   demo,
-}: ProjectDescProps) => (
-  <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4  md:grid-cols-12">
-    <span className="col-span-1 text-3xl font-bold md:col-span-4">
-      <h2 className="col-span-1 text-3xl font-bold md:col-span-4">{title}</h2>
+}: ProjectDescProps) => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"],
+  });
 
-      <aside className="mt-3 flex flex-col gap-y-2">
-        {link && (
-          <Button className="flex gap-x-2 hover:scale-105" asChild>
-            <a href={link}>
-              <Github />
-              Code
-            </a>
-          </Button>
-        )}
-        {demo && (
-          <Button className="flex gap-x-2 hover:scale-105" asChild>
-            <a href={demo}>
-              <Link />
-              Preview
-            </a>
-          </Button>
-        )}
-      </aside>
-    </span>
-    <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl text-neutral-600 md:text-2xl">{desc}</p>
-      <p className="mb-8 text-xl text-neutral-600 md:text-2xl">{subText}</p>
+  const y = useTransform(scrollYProgress, [0, 1], [250, -250]);
+  const opacity = useTransform(scrollYProgress, [0.25, 0.5, 0.75], [0, 1, 0]);
+
+  return (
+    <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4  md:grid-cols-12">
+      <span className="col-span-1 text-3xl font-bold md:col-span-4">
+        <h2 className="col-span-1 text-3xl font-bold md:col-span-4">{title}</h2>
+
+        <aside className="mt-3 flex flex-col gap-y-2">
+          {link && (
+            <Button className="flex gap-x-2 hover:scale-105" asChild>
+              <a href={link}>
+                <Github />
+                Code
+              </a>
+            </Button>
+          )}
+          {demo && (
+            <Button className="flex gap-x-2 hover:scale-105" asChild>
+              <a href={demo}>
+                <Link />
+                Preview
+              </a>
+            </Button>
+          )}
+        </aside>
+      </span>
+      <div className="col-span-1 md:col-span-8">
+        <motion.p
+          ref={targetRef}
+          style={{ opacity }}
+          className={`mb-4 text-xl text-neutral-400/${y} md:text-2xl`}
+        >
+          {desc}
+        </motion.p>
+        <p className="mb-8 text-xl text-neutral-600 md:text-2xl">{subText}</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
