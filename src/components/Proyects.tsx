@@ -284,18 +284,18 @@ const ProjectDesc = ({
 
         <aside className="mt-3 flex flex-col gap-y-2">
           {link && (
-            <Button className="flex gap-x-2 hover:scale-105" asChild>
+            <Button className="flex gap-x-2 hover:scale-105 group" asChild>
               <a href={link}>
                 <Github />
-                Code
+                <p className="group-hover:underline">Code</p>
               </a>
             </Button>
           )}
           {demo && (
-            <Button className="flex gap-x-2 hover:scale-105" asChild>
+            <Button className="flex gap-x-2 hover:scale-105 group" asChild>
               <a href={demo}>
                 <Link />
-                Preview
+                <p className="group-hover:underline">Preview</p>
               </a>
             </Button>
           )}
