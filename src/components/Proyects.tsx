@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CodeXml, TentIcon } from "lucide-react";
+import { CodeXml, GitBranchPlus, Github, Link, TentIcon } from "lucide-react";
 import { Button } from "./ui/button";
+import { GitHub } from "./icons/TechIcon";
 
 const PATH_ICON = "/icon/";
 
@@ -10,15 +11,23 @@ const PROJECT = [
     imgURl: "/img/Guarderia.jpg",
     title: "Guardi Yami",
     desc: "Guardi Yami es un sistema integral de gestión y administración diseñado específicamente para una guardería infantil. El proyecto abarca tanto el diseño de la identidad visual como la creación de un sitio web interactivo y funcional. Mi responsabilidad principal en este proyecto incluyó el desarrollo completo del frontend y backend, asegurando una experiencia de usuario intuitiva y una gestión de datos eficiente.",
-    url: "",
+    link: "",
     demo: "",
-    tech: ["react", "typescript", "tailwind", "nest", "postgres"],
+    tech: ["react", "typescript", "tailwind", "nest", "postgres",'jest'],
+  },
+  {
+    imgURl: "/img/tv.webp",
+    title: "Tv Tecopos",
+    desc: "Tv Tecopos es una plataforma web diseñada para televisores, que permite la promoción dinámica de productos a través de transiciones visualmente atractivas. Esta aplicación está vinculada a un sistema de administración web que facilita el control y la actualización de los contenidos mostrados en tiempo real. La solución está orientada a mejorar la experiencia de marketing visual en entornos de retail y otros espacios comerciales.",
+    link: "",
+    demo: "https://tv.tecopos.com/",
+    tech: ["react", "typescript","express"],
   },
   {
     imgURl: "/img/spacex.jpg",
     title: "Space-X-Demo",
     desc: "Space-X-Demo es una web demo desarrollada. Este proyecto tiene como objetivo probar las transiciones de vista (view transitions) y mostrar información en tiempo real sobre los lanzamientos de SpaceX, utilizando su API pública. La aplicación proporciona una experiencia de usuario fluida y atractiva, permitiendo explorar datos detallados sobre misiones espaciales, cohetes y fechas de lanzamiento.",
-    url: "",
+    link: "https://github.com/wolfsoul01/SpaceX_launches_ViewTransitions",
     demo: "",
     tech: ["astroWithe", "typescript", "tailwind"],
   },
@@ -26,10 +35,11 @@ const PROJECT = [
     imgURl: "/img/0_X.jpg",
     title: "Tic Tac Toe ",
     desc: "Este es un simple juego de Tic Tac Toe desarrollado en React. ¡Diviértete jugando con un amigo!",
-    url: "",
+    link: "https://github.com/wolfsoul01/Tic_Tac_Toe",
     demo: "",
     tech: ["react", "typescript"],
   },
+ 
 ];
 
 export const TextParallaxContentExample = () => {
@@ -51,7 +61,7 @@ export const TextParallaxContentExample = () => {
               subheading={item.tech}
               heading={item.title}
             >
-              <ProjectDesc desc={item.desc} subText={""} title={item.title} />
+              <ProjectDesc desc={item.desc} subText={""} title={item.title} demo={item.demo} link={item.link} />
             </TextParallaxContent>
           </article>
         ))}
@@ -153,7 +163,10 @@ const OverlayCopy = ({
       </h3>
       <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2">
         {subheading.map((item) => (
-          <img className="w-12 hover:rotate-1" src={`${PATH_ICON}${item}.svg`} />
+          <img
+            className="w-12 hover:rotate-1"
+            src={`${PATH_ICON}${item}.svg`}
+          />
         ))}
       </aside>
     </motion.div>
@@ -179,9 +192,23 @@ const ProjectDesc = ({
     <span className="col-span-1 text-3xl font-bold md:col-span-4">
       <h2 className="col-span-1 text-3xl font-bold md:col-span-4">{title}</h2>
 
-      <aside className="">
-        {link && <Button></Button>}
-        {demo && <Button></Button>}
+      <aside className="mt-3 flex flex-col gap-y-2">
+        {link && (
+          <Button className="flex gap-x-2 hover:scale-105" asChild>
+            <a href={link}>
+              <Github />
+              Code
+            </a>
+          </Button>
+        )}
+        {demo && (
+          <Button className="flex gap-x-2 hover:scale-105" asChild>
+            <a href={demo}>
+              <Link />
+              Preview
+            </a>
+          </Button>
+        )}
       </aside>
     </span>
     <div className="col-span-1 md:col-span-8">
