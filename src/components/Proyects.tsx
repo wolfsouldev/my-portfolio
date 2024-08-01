@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CodeXml, Github, Link, TentIcon } from "lucide-react";
+import { CodeXml, Github, Icon, Link, TentIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Carousel,
@@ -12,6 +12,23 @@ import {
 
 const PATH_ICON = "/icon/";
 
+const Icons = {
+  react: "react",
+  typescript: "typescript",
+  tailwind: "tailwind",
+  nest: "nest",
+  postgres: "postgres",
+  jest: "jest",
+  framer: "framer-motion",
+  express: "express",
+  express_b: "express",
+  astroWithe: "astroWithe",
+  redux: "redux",
+  redux_b: "redux",
+  redis: "redis",
+  sequelize: "sequelize",
+};
+
 const PROJECT = [
   {
     imgURl: ["/img/Guarderia.jpg"],
@@ -19,7 +36,14 @@ const PROJECT = [
     desc: "Guardi Yami es un sistema integral de gestión y administración diseñado específicamente para una guardería infantil. El proyecto abarca tanto el diseño de la identidad visual como la creación de un sitio web interactivo y funcional. Mi responsabilidad principal en este proyecto incluyó el desarrollo completo del frontend y backend, asegurando una experiencia de usuario intuitiva y una gestión de datos eficiente.",
     link: "",
     demo: "",
-    tech: ["react", "typescript", "tailwind", "nest", "postgres", "jest"],
+    tech: [
+      Icons.react,
+      Icons.typescript,
+      Icons.tailwind,
+      Icons.nest,
+      Icons.postgres,
+      Icons.jest,
+    ],
   },
   {
     imgURl: ["/img/tv.webp"],
@@ -27,7 +51,35 @@ const PROJECT = [
     desc: "Tv Tecopos es una plataforma web diseñada para televisores, que permite la promoción dinámica de productos a través de transiciones visualmente atractivas. Esta aplicación está vinculada a un sistema de administración web que facilita el control y la actualización de los contenidos mostrados en tiempo real. La solución está orientada a mejorar la experiencia de marketing visual en entornos de retail y otros espacios comerciales.",
     link: "",
     demo: "https://tv.tecopos.com/",
-    tech: ["react", "framer-motion", "typescript", "express", "jest"],
+    tech: [
+      Icons.react,
+      Icons.framer,
+      Icons.typescript,
+      Icons.express,
+      Icons.jest,
+    ],
+  },
+  {
+    imgURl: [
+      "/img/reservations.webp",
+      "/img/reservations_4.webp",
+      "/img/reservations_2.webp",
+      "/img/reservations_3.webp",
+    ],
+    title: "Modulo Reservaciones",
+    desc: "El Módulo de Reservaciones es una solución integral para la gestión de negocios, diseñada para administrar reservas de manera visual y eficiente. Esta herramienta permite a los usuarios programar y gestionar citas o eventos por fecha a través de una interfaz intuitiva y atractiva.Me encargue del desarrollado tanto del backend como del frontend de este módulo, asegurando una experiencia de usuario fluida y una administración robusta de los datos.",
+    link: "",
+    demo: "https://admin.tecopos.com/reservation/calendar",
+    tech: [
+      Icons.react,
+      Icons.typescript,
+      Icons.redux,
+      Icons.express_b,
+      Icons.postgres,
+      Icons.redis,
+      Icons.tailwind,
+      Icons.framer,
+    ],
   },
   {
     imgURl: ["/img/spacex.jpg"],
@@ -35,7 +87,7 @@ const PROJECT = [
     desc: "Space-X-Demo es una web demo desarrollada. Este proyecto tiene como objetivo probar las transiciones de vista (view transitions) y mostrar información en tiempo real sobre los lanzamientos de SpaceX, utilizando su API pública. La aplicación proporciona una experiencia de usuario fluida y atractiva, permitiendo explorar datos detallados sobre misiones espaciales, cohetes y fechas de lanzamiento.",
     link: "https://github.com/wolfsoul01/SpaceX_launches_ViewTransitions",
     demo: "",
-    tech: ["astroWithe", "typescript", "tailwind"],
+    tech: [Icons.astroWithe, Icons.tailwind, Icons.typescript],
   },
   {
     imgURl: ["/img/0_X.jpg"],
@@ -43,7 +95,7 @@ const PROJECT = [
     desc: "Este es un simple juego de Tic Tac Toe desarrollado en React. ¡Diviértete jugando con un amigo!",
     link: "https://github.com/wolfsoul01/Tic_Tac_Toe",
     demo: "",
-    tech: ["react", "typescript"],
+    tech: [Icons.react, Icons.typescript],
   },
 ];
 
@@ -63,7 +115,7 @@ export const TextParallaxContentExample = () => {
             <TextParallaxContent
               key={item.title}
               imgUrl={item.imgURl}
-              subheading={item.tech}
+              techs={item.tech}
               heading={item.title}
             >
               <ProjectDesc
@@ -85,13 +137,13 @@ const IMG_PADDING = 12;
 
 interface TextParallaxContentProps {
   imgUrl: string[];
-  subheading: string[];
+  techs: string[];
   heading: string;
   children: React.ReactElement;
 }
 const TextParallaxContent = ({
   imgUrl,
-  subheading,
+  techs,
   heading,
   children,
 }: TextParallaxContentProps) => {
@@ -104,7 +156,7 @@ const TextParallaxContent = ({
     >
       <div className="relative ">
         <StickyImage imgUrl={imgUrl} />
-        <OverlayCopy heading={heading} subheading={subheading} />
+        <OverlayCopy heading={heading} techs={techs} />
       </div>
       {children}
     </div>
@@ -161,10 +213,10 @@ const StickyImage = ({ imgUrl }: { imgUrl: string[] }) => {
 };
 
 const OverlayCopy = ({
-  subheading,
+  techs,
   heading,
 }: {
-  subheading: string[];
+  techs: string[];
   heading: string;
 }) => {
   const targetRef = useRef(null);
@@ -189,7 +241,7 @@ const OverlayCopy = ({
         {heading}
       </h3>
       <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2">
-        {subheading.map((item) => (
+        {techs.map((item) => (
           <img
             key={item}
             className="w-12 hover:rotate-1"
