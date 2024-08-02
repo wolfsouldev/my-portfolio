@@ -114,7 +114,7 @@ const PROJECT = [
     title: "Tic Tac Toe ",
     desc: "Este es un simple juego de Tic Tac Toe desarrollado en React. ¡Diviértete jugando con un amigo!",
     link: "https://github.com/wolfsoul01/Tic_Tac_Toe",
-    demo: "",
+    demo: "https://tictactoexo2.netlify.app",
     tech: [Icons.react, Icons.typescript],
   },
 ];
