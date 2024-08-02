@@ -82,6 +82,26 @@ const PROJECT = [
     ],
   },
   {
+    imgURl: [
+      "/img/billing.webp",
+      "/img/billing_2.webp",
+      "/img/billing_3.webp",
+    ],
+    title: "Modulo Facturación",
+    desc: "El Módulo de Facturación de Órdenes y Pedidos de Compra es una herramienta esencial para la gestión financiera de negocios, permitiendo un seguimiento preciso y eficiente de las transacciones comerciales. Este módulo facilita la creación, gestión y seguimiento de facturas, así como la administración de órdenes y pedidos de compra, proporcionando a los usuarios una visión clara y organizada de sus operaciones financieras. He desarrollado tanto el backend como el frontend de este módulo para asegurar una experiencia de usuario integrada y fluida.",
+    link: "",
+    demo: "https://admin.tecopos.com/billing/",
+    tech: [
+      Icons.react,
+      Icons.typescript,
+      Icons.redux,
+      Icons.express_b,
+      Icons.postgres,
+      Icons.redis,
+      Icons.tailwind,
+    ],
+  },
+  {
     imgURl: ["/img/spacex.jpg"],
     title: "Space-X-Demo",
     desc: "Space-X-Demo es una web demo desarrollada. Este proyecto tiene como objetivo probar las transiciones de vista (view transitions) y mostrar información en tiempo real sobre los lanzamientos de SpaceX, utilizando su API pública. La aplicación proporciona una experiencia de usuario fluida y atractiva, permitiendo explorar datos detallados sobre misiones espaciales, cohetes y fechas de lanzamiento.",
@@ -306,6 +326,7 @@ const ProjectDesc = ({
           ref={targetRef}
           style={{ opacity }}
           className={`mb-4 text-xl text-neutral-400/${y} md:text-2xl`}
+          //transition={{ ease: true ,duration:200}}
         >
           {desc}
         </motion.p>
