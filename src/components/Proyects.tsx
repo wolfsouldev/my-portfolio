@@ -261,7 +261,7 @@ const OverlayCopy = ({
           const key = useId();
           return (
             <img
-              key={key}
+              key={heading + key}
               className="w-10 md:w-12 hover:rotate-1"
               src={`${PATH_ICON}${item}.svg`}
             />
