@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useId, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CodeXml, Github, Icon, Link, TentIcon } from "lucide-react";
 import { Button } from "./ui/button";
@@ -82,11 +82,7 @@ const PROJECT = [
     ],
   },
   {
-    imgURl: [
-      "/img/billing.webp",
-      "/img/billing_2.webp",
-      "/img/billing_3.webp",
-    ],
+    imgURl: ["/img/billing.webp", "/img/billing_2.webp", "/img/billing_3.webp"],
     title: "Modulo Facturación",
     desc: "El Módulo de Facturación de Órdenes y Pedidos de Compra es una herramienta esencial para la gestión financiera de negocios, permitiendo un seguimiento preciso y eficiente de las transacciones comerciales. Este módulo facilita la creación, gestión y seguimiento de facturas, así como la administración de órdenes y pedidos de compra, proporcionando a los usuarios una visión clara y organizada de sus operaciones financieras. He desarrollado tanto el backend como el frontend de este módulo para asegurar una experiencia de usuario integrada y fluida.",
     link: "",
@@ -260,14 +256,17 @@ const OverlayCopy = ({
       <h3 className="text-center text-4xl font-bold md:text-7xl mb-5">
         {heading}
       </h3>
-      <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2">
-        {techs.map((item) => (
-          <img
-            key={item}
-            className="w-12 hover:rotate-1"
-            src={`${PATH_ICON}${item}.svg`}
-          />
-        ))}
+      <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2 flex-wrap max-w-full px-5">
+        {techs.map((item) => {
+          const key = useId();
+          return (
+            <img
+              key={key}
+              className="w-10 md:w-12 hover:rotate-1"
+              src={`${PATH_ICON}${item}.svg`}
+            />
+          );
+        })}
       </aside>
     </motion.div>
   );
