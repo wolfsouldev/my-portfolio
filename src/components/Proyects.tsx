@@ -1,6 +1,6 @@
 import React, { useId, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CodeXml, Github, Icon, Link, TentIcon } from "lucide-react";
+import { CodeXml, Github,  Icon,  Link } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Carousel,
@@ -15,6 +15,7 @@ const PATH_ICON = "/icon/";
 const Icons = {
   react: "react",
   typescript: "typescript",
+  javascript: "javascript",
   tailwind: "tailwind",
   nest: "nest",
   postgres: "postgres",
@@ -27,6 +28,8 @@ const Icons = {
   redux_b: "redux",
   redis: "redis",
   sequelize: "sequelize",
+  nodeJs: "nodejs",
+  cli: "cli",
 };
 
 const PROJECT = [
@@ -104,6 +107,13 @@ const PROJECT = [
     link: "https://github.com/wolfsoul01/SpaceX_launches_ViewTransitions",
     demo: "",
     tech: [Icons.astroWithe, Icons.tailwind, Icons.typescript],
+  },
+  {
+    imgURl: ["/img/cli_1.webp","/img/cli_2.webp"],
+    title: "GitHub CLI Activity Viewer",
+    desc: "Una aplicación de línea de comandos (CLI) desarrollada en JavaScript que permite a los usuarios consultar información sobre perfiles de GitHub. Esta herramienta interactiva ofrece opciones para visualizar detalles del perfil, repositorios públicos, seguidores, seguidos, gists, y eventos recientes. Con un diseño enfocado en la simplicidad y la eficiencia, esta CLI facilita la gestión y visualización de datos directamente desde la terminal, utilizando una interfaz de usuario atractiva y fácil de usar.",
+    link: "https://github.com/wolfsoul01/githbub-cli",
+    tech: [Icons.nodeJs,Icons.javascript,Icons.cli],
   },
   {
     imgURl: ["/img/0_X.jpg"],
