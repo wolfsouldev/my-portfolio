@@ -1,6 +1,6 @@
 import React, { useId, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { CodeXml, Github,  Icon,  Link } from "lucide-react";
+import { CodeXml, Github, Icon, Link } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Carousel,
@@ -18,7 +18,9 @@ const Icons = {
   javascript: "javascript",
   tailwind: "tailwind",
   nest: "nest",
+  next: "next",
   postgres: "postgres",
+  mongodb: "mongodb",
   jest: "jest",
   framer: "framer-motion",
   express: "express",
@@ -34,11 +36,31 @@ const Icons = {
 
 const PROJECT = [
   {
+    imgURl: [
+      "/img/password_1.webp",
+      "/img/password_2.webp",
+      "/img/password_3.webp",
+      "/img/password_4.webp",
+    ],
+    title: "Cajon de claves",
+    desc: "Cajón de Claves es una aplicación web diseñada para la gestión segura de contraseñas. Permite a los usuarios almacenar, organizar y acceder a sus contraseñas de manera fácil y segura desde cualquier dispositivo. La aplicación cuenta con funciones como cifrado de extremo a extremo, generación de contraseñas seguras, y categorización personalizada, asegurando que las contraseñas estén siempre protegidas y accesibles.",
+    link: "",
+    demo: "https://mypasswordweb.netlify.app/",
+    tech: [
+      Icons.next,
+      Icons.react,
+      Icons.typescript,
+      Icons.tailwind,
+      Icons.framer,
+      Icons.mongodb,
+    ],
+  },
+  {
     imgURl: ["/img/Guarderia.jpg"],
     title: "Guardi Yami",
     desc: "Guardi Yami es un sistema integral de gestión y administración diseñado específicamente para una guardería infantil. El proyecto abarca tanto el diseño de la identidad visual como la creación de un sitio web interactivo y funcional. Mi responsabilidad principal en este proyecto incluyó el desarrollo completo del frontend y backend, asegurando una experiencia de usuario intuitiva y una gestión de datos eficiente.",
     link: "",
-    demo: "",
+    demo: "https://guardy-yami.netlify.app",
     tech: [
       Icons.react,
       Icons.typescript,
@@ -105,15 +127,15 @@ const PROJECT = [
     title: "Space-X-Demo",
     desc: "Space-X-Demo es una web demo desarrollada. Este proyecto tiene como objetivo probar las transiciones de vista (view transitions) y mostrar información en tiempo real sobre los lanzamientos de SpaceX, utilizando su API pública. La aplicación proporciona una experiencia de usuario fluida y atractiva, permitiendo explorar datos detallados sobre misiones espaciales, cohetes y fechas de lanzamiento.",
     link: "https://github.com/wolfsoul01/SpaceX_launches_ViewTransitions",
-    demo: "",
+    demo: "https://spacex-view-transition.netlify.app/",
     tech: [Icons.astroWithe, Icons.tailwind, Icons.typescript],
   },
   {
-    imgURl: ["/img/cli_1.webp","/img/cli_2.webp"],
+    imgURl: ["/img/cli_1.webp", "/img/cli_2.webp"],
     title: "GitHub CLI Activity Viewer",
     desc: "Una aplicación de línea de comandos (CLI) desarrollada en JavaScript que permite a los usuarios consultar información sobre perfiles de GitHub. Esta herramienta interactiva ofrece opciones para visualizar detalles del perfil, repositorios públicos, seguidores, seguidos, gists, y eventos recientes. Con un diseño enfocado en la simplicidad y la eficiencia, esta CLI facilita la gestión y visualización de datos directamente desde la terminal, utilizando una interfaz de usuario atractiva y fácil de usar.",
     link: "https://github.com/wolfsoul01/githbub-cli",
-    tech: [Icons.nodeJs,Icons.javascript,Icons.cli],
+    tech: [Icons.nodeJs, Icons.javascript, Icons.cli],
   },
   {
     imgURl: ["/img/0_X.jpg"],
@@ -322,7 +344,7 @@ const ProjectDesc = ({
           )}
           {demo && (
             <Button className="flex gap-x-2 hover:scale-105 group" asChild>
-              <a href={demo}>
+              <a href={demo} target="_blank">
                 <Link />
                 <p className="group-hover:underline">Preview</p>
               </a>
