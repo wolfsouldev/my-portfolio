@@ -364,7 +364,7 @@ const ProjectDesc = ({
   return (
     <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4  md:grid-cols-12">
       <span className="col-span-1 text-3xl font-bold md:col-span-4">
-        <h2 className="col-span-1 text-3xl font-bold md:col-span-4">{title}</h2>
+        <h2 className="col-span-1 text-4xl font-bold md:col-span-4">{title}</h2>
 
         <aside className="mt-3 flex flex-col gap-y-2">
           {link && (
