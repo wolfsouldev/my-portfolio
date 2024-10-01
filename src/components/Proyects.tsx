@@ -32,9 +32,38 @@ const Icons = {
   sequelize: "sequelize",
   nodeJs: "nodejs",
   cli: "cli",
+  aws: "aws",
+  prisma: "prisma",
+  typeOrm: "typeOrm",
+  docker: "docker",
+  kubernetes: "kubernetes",
 };
 
 const PROJECT = [
+  {
+    imgURl: [
+      "/img/rental_1.webp",
+      "/img/rental_2.webp",
+      "/img/rental_3.webp",
+      "/img/rental_4.webp",
+      "/img/rental_5.webp",
+      "/img/rental_6.webp",
+    ],
+    title: "Agency Go",
+    desc: "Agency Go es una plataforma de gestión de alquileres de habitaciones y autos para negocios turísticos. Incluye una aplicación administrativa para gestionar reservas y el estado de habitaciones y vehículos, mientras los clientes pueden iniciar sesión y hacer reservas en línea. La aplicación está contenedorizada con Docker y desplegada en AWS, aprovechando servicios como EC2 y RDS AWS Lambda para garantizar escalabilidad, alta disponibilidad y procesamiento eficiente.",
+    link: "",
+    demo: "",
+    tech: [
+      Icons.typescript,
+      Icons.tailwind,
+      Icons.framer,
+      Icons.next,
+      Icons.nest,
+      Icons.postgres,
+      Icons.docker,
+      Icons.aws,
+    ],
+  },
   {
     imgURl: [
       "/img/password_1.webp",
@@ -326,7 +355,11 @@ const ProjectDesc = ({
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-  const opacity = useTransform(scrollYProgress, [0.25, 0.5, 0.75], [0, 1, 0]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0.25, 0.5, 0.75],
+    [0.1, 1, 0.1]
+  );
 
   return (
     <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4  md:grid-cols-12">
