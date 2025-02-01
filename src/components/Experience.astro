@@ -1,22 +1,30 @@
 ---
 import { Briefcase } from "lucide-react";
 import ExperienceItem from "./ExperienceItem.astro";
-const EXPERIENCIE = [
+const EXPERIENCE = [
   {
-    date: "Septiembre 2023-2024",
+    date: "Noviembre 2024 - Actualidad",
+    title: "Principal Software Engineer - Full-Stack",
+    company: "Cute Digital Media",
+    description:
+      "Encargado del mantenimiento y evolución de múltiples proyectos basados en arquitectura de microservicios y sistemas multitenant. Responsable de la reestructuración y modernización del proyectos, optimizando su escalabilidad, seguridad y eficiencia. Implementación de mejores prácticas de desarrollo.",
+  },
+  {
+    date: "Septiembre 2023 - 2024",
     title: "Full-Stack Engineer",
     company: "Tecopos",
     description:
-      "Desarollador Full-Stack en donde desempelle papel del desarollo y restrcturacion de la arquitectura del sistema a microservicos actualizadno el proyecto legacy.",
+      "Lideré la migración de una arquitectura monolítica a microservicios, mejorando la escalabilidad y mantenibilidad del sistema. Desarrollo y optimización de nuevas funcionalidades en frontend y backend, asegurando un alto rendimiento y estabilidad del sistema. Implementación de CI/CD y estrategias de despliegue automatizado.",
   },
   {
-    date: "Octubre 2021-2022",
+    date: "Octubre 2021 - 2022",
     title: "Principal Backend Engineer",
     company: "UNE Mtz",
     description:
-      "Responsable de la creacion y manteniemneto del sistema informatico priciapal de la empresa.Implantación de medidas de integración continua y despliegue con A/B testing y automatizacion de proceso liderando 2 equipos de desarollo.",
+      "Responsable del diseño, desarrollo y mantenimiento del sistema informático principal de la empresa. Implementación de estrategias de integración continua (CI/CD) y despliegue con A/B testing. Automatización de procesos clave para optimizar la productividad del equipo. Lideré dos equipos de desarrollo, asegurando la entrega eficiente y de alta calidad del software.",
   },
 ];
+
 ---
 
 <div>
@@ -29,9 +37,9 @@ const EXPERIENCIE = [
 
   <ol class="relative mt-16">
     {
-      EXPERIENCIE.map((experiencie) => (
+      EXPERIENCE.map((experience) => (
         <li class="">
-          <ExperienceItem {...experiencie} />
+          <ExperienceItem {...experience} />
         </li>
       ))
     }
