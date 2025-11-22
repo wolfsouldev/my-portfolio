@@ -15,7 +15,7 @@ const { class: className, id, animated = true } = Astro.props;
     <motion.section
       id={id}
       data-section={id}
-      className={`section ${className} w-full mx-auto container lg:max-w-5xl md:max-w-3xl`}
+      className={`section ${className} w-full mx-auto container lg:max-w-7xl md:max-w-3xl`}
       initial={{ opacity: 0, y: 20, scale: 0.9, rotate: -2 }}
       whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
       transition={{
@@ -35,7 +35,7 @@ const { class: className, id, animated = true } = Astro.props;
 {
   !animated && (
     <section
-      class={`section ${className} w-full mx-auto container lg:max-w-5xl md:max-w-3xl`}
+      class={`section ${className} w-full mx-auto container lg:max-w-7xl md:max-w-3xl`}
     >
       <slot />
     </section>

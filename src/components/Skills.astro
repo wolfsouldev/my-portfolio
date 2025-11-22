@@ -2,81 +2,99 @@
 import { Brain, SkullIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
 
-const skills = [
-  {
-    name: "Typescript",
-    icon: "",
-  },
-  {
-    name: "Tailwind",
-    icon: "",
-  },
-  {
-    name: "NodeJs",
-    icon: "",
-  },
-  {
-    name: "Express",
-    icon: "",
-  },
-  {
-    name: "NestJs",
-    icon: "",
-  },
-  {
-    name: "React",
-    icon: "",
-  },
-  {
-    name: "Next",
-    icon: "",
-  },
-  {
-    name: "Astro",
-    icon: "",
-  },
-  {
-    name: "Github",
-    icon: "",
-  },
-  {
-    name: "Postgres",
-    icon: "",
-  },
-  {
-    name: "MongoDB",
-    icon: "",
-  },
-  {
-    name: "MySql",
-    icon: "",
-  },
-  {
-    name: "Redis",
-    icon: "",
-  },
-  {
-    name: "Dcoker",
-    icon: "",
-  },
+const frontendSkills = [
+  { name: "Typescript", icon: "" },
+  { name: "React", icon: "" },
+  { name: "Next", icon: "" },
+  { name: "Angular", icon: "" },
+  { name: "Astro", icon: "" },
+  { name: "Tailwind", icon: "" },
+  { name: "Material UI", icon: "" },
+  { name: "HTML", icon: "" },
+  { name: "CSS", icon: "" },
+];
+
+const backendSkills = [
+  { name: "NodeJs", icon: "" },
+  { name: "Express", icon: "" },
+  { name: "NestJs", icon: "" },
+  { name: "Python", icon: "" },
+  { name: "Django", icon: "" },
+  { name: "FastAPI", icon: "" },
+  { name: "Postgres", icon: "" },
+  { name: "MongoDB", icon: "" },
+  { name: "MySql", icon: "" },
+  { name: "MariaDB", icon: "" },
+  { name: "Redis", icon: "" },
+  { name: "SQLite", icon: "" },
+  { name: "InfluxDB", icon: "" },
+  { name: "Supabase", icon: "" },
+  { name: "Firebase", icon: "" },
+  { name: "GraphQL", icon: "" },
+  { name: "RabbitMQ", icon: "" },
+  { name: "Kafka", icon: "" },
+  { name: "WebSockets", icon: "" },
+];
+
+const utilitiesSkills = [
+  { name: "GitHub", icon: "" },
+  { name: "Docker", icon: "" },
+  { name: "CI/CD", icon: "" },
 ];
 ---
 
 <div>
   <h2
-    class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white "
+    class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
   >
     <Brain className="size-8" />
-    Tecnologias
+    Tecnologías
   </h2>
 
-  <ul class="flex gap-x-1 gap-y-2 flex-wrap">
-    {
-      skills.map((skill) => (
-        <li class=" cursor-default">
-          <Badge className="text-sm" >{skill.name}</Badge>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="space-y-6">
+    <div>
+      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
+        Frontend
+      </h3>
+      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
+        {
+          frontendSkills.map((skill) => (
+            <li class="cursor-default">
+              <Badge className="text-sm">{skill.name}</Badge>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
+        Backend
+      </h3>
+      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
+        {
+          backendSkills.map((skill) => (
+            <li class="cursor-default">
+              <Badge className="text-sm">{skill.name}</Badge>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
+        Utilidades
+      </h3>
+      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
+        {
+          utilitiesSkills.map((skill) => (
+            <li class="cursor-default">
+              <Badge className="text-sm">{skill.name}</Badge>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
 </div>
