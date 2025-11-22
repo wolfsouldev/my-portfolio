@@ -37,9 +37,18 @@ const Icons = {
   typeOrm: "typeOrm",
   docker: "docker",
   kubernetes: "kubernetes",
+  vscode: "vscode",
 };
 
 const PROJECT = [
+  {
+    imgURl: ["/img/jerrys-pixel-icons_1.png"],
+    title: "Jerry's Pixel Icons",
+    desc: "“Jerry’s Pixel Icons es una extensión para Visual Studio Code que reemplaza los iconos del explorador de archivos por un set en estilo pixel-art, aportando un toque divertido y retro a tu editor. Fácil de activar y personalizar.",
+    link: "https://github.com/wolfsouldev/jerrys-pixel-icons",
+    demo: "https://marketplace.visualstudio.com/items?itemName=MelissaGutierrez.jerrys-pixel-icons&ssr=false#overview",
+    tech: [Icons.typescript, Icons.javascript, Icons.vscode],
+  },
   {
     imgURl: [
       "/img/rental_1.webp",
@@ -265,7 +274,7 @@ const StickyImage = ({ imgUrl }: { imgUrl: string[] }) => {
                   backgroundImage: `url(${item})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  height: `calc(100vh - ${IMG_PADDING * 2}px)`,
+                  height: `calc(70vh - ${IMG_PADDING * 2}px)`,
                   top: IMG_PADDING,
                   scale,
                 }}
@@ -303,21 +312,23 @@ const OverlayCopy = ({
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [250, -250]);
-  const opacity = useTransform(scrollYProgress, [0.25, 0.5, 0.75], [0, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0.1, 0.4, 0.8], [0, 1, 0]);
 
   return (
     <motion.div
       style={{
         y,
         opacity,
+        top: IMG_PADDING,
+        height: `calc(70vh - ${IMG_PADDING * 2}px)`,
       }}
       ref={targetRef}
-      className="absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-white"
+      className="absolute inset-x-0 flex flex-col items-center justify-center text-white"
     >
       <h3 className="text-center text-4xl font-bold md:text-7xl mb-5">
         {heading}
       </h3>
-      <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2 flex-wrap max-w-full px-5">
+      <aside className="mb-2 text-center text-xl md:mb-4 md:text-3xl flex gap-x-2 flex-wrap justify-center max-w-full px-5">
         {techs.map((item) => {
           const key = useId();
           return (
@@ -362,7 +373,7 @@ const ProjectDesc = ({
   );
 
   return (
-    <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-4  md:grid-cols-12">
+    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-14  md:grid-cols-12">
       <span className="col-span-1 text-3xl font-bold md:col-span-4">
         <h2 className="col-span-1 text-4xl font-bold md:col-span-4">{title}</h2>
 
