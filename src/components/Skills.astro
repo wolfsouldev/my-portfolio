@@ -1,101 +1,94 @@
 ---
-import { Brain, SkullIcon } from "lucide-react";
-import { Badge } from "./ui/badge";
+import { Brain, Braces, CloudCog, ServerCog } from "lucide-react";
 
-const frontendSkills = [
-  { name: "Typescript", icon: "" },
-  { name: "React", icon: "" },
-  { name: "Next", icon: "" },
-  { name: "Angular", icon: "" },
-  { name: "Astro", icon: "" },
-  { name: "React Native/Expo ", icon: "" },
-  { name: "Tailwind", icon: "" },
-  { name: "Material UI", icon: "" },
-  { name: "HTML", icon: "" },
-  { name: "CSS", icon: "" },
-];
-
-const backendSkills = [
-  { name: "NodeJs", icon: "" },
-  { name: "Express", icon: "" },
-  { name: "NestJs", icon: "" },
-  { name: "Python", icon: "" },
-  { name: "Django", icon: "" },
-  { name: "FastAPI", icon: "" },
-  { name: "Postgres", icon: "" },
-  { name: "MongoDB", icon: "" },
-  { name: "MySql", icon: "" },
-  { name: "MariaDB", icon: "" },
-  { name: "Redis", icon: "" },
-  { name: "SQLite", icon: "" },
-  { name: "InfluxDB", icon: "" },
-  { name: "Supabase", icon: "" },
-  { name: "Firebase", icon: "" },
-  { name: "GraphQL", icon: "" },
-  { name: "RabbitMQ", icon: "" },
-  { name: "Kafka", icon: "" },
-  { name: "WebSockets", icon: "" },
-];
-
-const utilitiesSkills = [
-  { name: "GitHub", icon: "" },
-  { name: "Docker", icon: "" },
-  { name: "CI/CD", icon: "" },
+const skillGroups = [
+  {
+    id: "backend",
+    index: "01",
+    title: "Backend & datos",
+    description: "Sistemas robustos, APIs y arquitecturas preparadas para crecer.",
+    skills: [
+      "Node.js", "NestJS", "Express", "Python", "Django", "FastAPI",
+      "PostgreSQL", "MongoDB", "Redis", "GraphQL", "WebSockets", "Kafka",
+      "RabbitMQ", "Supabase",
+    ],
+  },
+  {
+    id: "frontend",
+    index: "02",
+    title: "Frontend & producto",
+    description: "Interfaces rápidas y mantenibles, de la web al móvil.",
+    skills: [
+      "TypeScript", "React", "Next.js", "Astro", "Angular", "React Native",
+      "Expo", "Tailwind CSS", "Material UI", "Framer Motion",
+    ],
+  },
+  {
+    id: "platform",
+    index: "03",
+    title: "Cloud & workflow",
+    description: "Entornos reproducibles y entregas automatizadas.",
+    skills: ["Docker", "AWS", "Kubernetes", "CI/CD", "GitHub", "Jest", "Prisma", "TypeORM"],
+  },
 ];
 ---
 
-<div>
-  <h2
-    class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
-  >
-    <Brain className="size-8" />
-    Tecnologías
-  </h2>
-
-  <div class="space-y-6">
+<div class="skills-shell">
+  <header class="section-heading">
     <div>
-      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
-        Frontend
-      </h3>
-      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
-        {
-          frontendSkills.map((skill) => (
-            <li class="cursor-default">
-              <Badge className="text-sm">{skill.name}</Badge>
-            </li>
-          ))
-        }
-      </ul>
+      <span class="section-kicker">Mi stack de trabajo</span>
+      <h2><Brain className="size-8" /> Tecnologías</h2>
     </div>
+    <p>Herramientas que utilizo para llevar un producto desde la idea hasta producción.</p>
+  </header>
 
-    <div>
-      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
-        Backend
-      </h3>
-      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
-        {
-          backendSkills.map((skill) => (
-            <li class="cursor-default">
-              <Badge className="text-sm">{skill.name}</Badge>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-medium mb-3 text-black/70 dark:text-white/80">
-        Utilidades
-      </h3>
-      <ul class="flex gap-x-1 gap-y-2 flex-wrap">
-        {
-          utilitiesSkills.map((skill) => (
-            <li class="cursor-default">
-              <Badge className="text-sm">{skill.name}</Badge>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+  <div class="skill-grid">
+    {skillGroups.map((group) => (
+      <article class="skill-panel">
+        <div class="skill-panel__head">
+          <span class="skill-index">{group.index}</span>
+          <span class="skill-icon" aria-hidden="true">
+            {group.id === "backend" && <ServerCog />}
+            {group.id === "frontend" && <Braces />}
+            {group.id === "platform" && <CloudCog />}
+          </span>
+        </div>
+        <h3>{group.title}</h3>
+        <p>{group.description}</p>
+        <ul aria-label={`Tecnologías de ${group.title}`}>
+          {group.skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </article>
+    ))}
   </div>
 </div>
+
+<style>
+  .skills-shell { padding: 1rem 0; }
+  .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+  .section-heading h2 { display: flex; align-items: center; gap: .75rem; margin-top: .45rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -.045em; }
+  .section-heading > p { max-width: 31rem; color: rgb(107 114 128); line-height: 1.7; }
+  :global(.dark) .section-heading > p { color: rgb(156 163 175); }
+  .section-kicker { color: rgb(251 146 60); font: 600 .72rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
+  .skill-grid { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 1rem; }
+  .skill-panel { position: relative; overflow: hidden; min-height: 25rem; padding: 1.5rem; border: 1px solid rgb(0 0 0 / .09); border-radius: 1.5rem; background: rgb(255 255 255 / .58); transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s, background .35s; }
+  .skill-panel::after { position: absolute; right: -3rem; bottom: -4rem; width: 11rem; height: 11rem; border: 1px solid rgb(251 146 60 / .18); border-radius: 50%; box-shadow: 0 0 0 2rem rgb(251 146 60 / .035), 0 0 0 4rem rgb(251 146 60 / .025); content: ""; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+  :global(.dark) .skill-panel { border-color: rgb(255 255 255 / .1); background: rgb(10 15 28 / .68); }
+  .skill-panel:hover { transform: translateY(-6px); border-color: rgb(251 146 60 / .45); background: rgb(255 255 255 / .8); }
+  :global(.dark) .skill-panel:hover { background: rgb(15 23 42 / .86); }
+  .skill-panel:hover::after { transform: scale(1.14); }
+  .skill-panel__head { display: flex; align-items: center; justify-content: space-between; }
+  .skill-index { color: rgb(156 163 175); font: 500 .75rem/1 ui-monospace, monospace; }
+  .skill-icon { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: .85rem; color: rgb(249 115 22); background: rgb(249 115 22 / .1); }
+  .skill-icon :global(svg) { width: 1.3rem; height: 1.3rem; }
+  .skill-panel h3 { margin-top: 2.5rem; font-size: 1.35rem; font-weight: 650; letter-spacing: -.025em; }
+  .skill-panel > p { min-height: 4.5rem; margin-top: .55rem; color: rgb(107 114 128); font-size: .92rem; line-height: 1.6; }
+  :global(.dark) .skill-panel > p { color: rgb(156 163 175); }
+  .skill-panel ul { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.4rem; }
+  .skill-panel li { cursor: default; border: 1px solid rgb(0 0 0 / .08); border-radius: 999px; padding: .45rem .7rem; color: rgb(55 65 81); background: rgb(255 255 255 / .72); font: 500 .74rem/1 ui-monospace, monospace; transition: color .2s, border-color .2s, transform .2s; }
+  :global(.dark) .skill-panel li { border-color: rgb(255 255 255 / .1); color: rgb(209 213 219); background: rgb(255 255 255 / .035); }
+  .skill-panel li:hover { transform: translateY(-2px); border-color: rgb(251 146 60 / .5); color: rgb(234 88 12); }
+  @media (max-width: 900px) { .skill-grid { grid-template-columns: 1fr 1fr; } .skill-panel:first-child { grid-column: 1 / -1; min-height: auto; } }
+  @media (max-width: 640px) { .section-heading { align-items: start; flex-direction: column; gap: .75rem; } .skill-grid { grid-template-columns: 1fr; } .skill-panel:first-child { grid-column: auto; } .skill-panel { min-height: auto; } .skill-panel > p { min-height: auto; } }
+  @media (prefers-reduced-motion: reduce) { .skill-panel, .skill-panel::after, .skill-panel li { transition: none; } }
+</style>

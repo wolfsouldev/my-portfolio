@@ -1,60 +1,52 @@
 ---
-import { Button } from "./ui/button"
-
 interface Props {
-  title: string
-  company: string
-  description: string
-  link?: string
-  date: string
+  title: string;
+  company: string;
+  description: string;
+  link?: string;
+  date: string;
+  index: number;
+  current: boolean;
 }
 
-const { title, company, description, link, date } = Astro.props
+const { title, company, description, link, date, index, current } = Astro.props;
 ---
 
-<div
-  class="relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:border-l-2 before:border-black/20 dark:before:border-white/15 before:content-[''] md:grid-cols-5 md:gap-10 md:space-x-4]"
->
-  <div class="relative pb-12 md:col-span-2">
-    <div class="sticky top-0">
-      <span class="text-orange-400 -left-[42px] absolute rounded-full text-5xl"
-        >&bull;</span
-      >
-
-      <h3 class="text-xl font-bold text-orange-400">{title}</h3>
-      <h4 class="font-semibold text-xl text-gray-600 dark:text-white">{company}</h4>
-      <time class="p-0 m-0 text-sm text-gray-600/80 dark:text-white/80">{date}</time>
+<article class="experience-item">
+  <div class="experience-meta">
+    <span class="index">{String(index).padStart(2, "0")}</span>
+    <time>{date}</time>
+  </div>
+  <div class="experience-role">
+    <div>
+      <h3>{title}</h3>
+      <p>{company}</p>
     </div>
+    {current && <span class="current"><i></i> Actual</span>}
   </div>
-  <div class="relative flex flex-col gap-2 pb-4 text-gray-600 dark:text-gray-300 md:col-span-3">
-    {description}
-    {
-      link && (
-        <Button variant={'link'} >
-          <a href={link}>
-
-          Saber más{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 icon icon-tabler icon-tabler-chevron-right"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </>
-          </svg>
-        </a>
-
-        </Button>
-      )
-    }
+  <div class="experience-copy">
+    <p>{description}</p>
+    {link && <a href={link}>Saber más <span aria-hidden="true">↗</span></a>}
   </div>
-</div>
+</article>
+
+<style>
+  .experience-item { display: grid; grid-template-columns: .55fr 1fr 1.5fr; gap: 2rem; padding: 2rem; transition: background .3s ease; }
+  .experience-item:hover { background: rgb(249 115 22 / .035); }
+  .experience-meta { display: flex; flex-direction: column; gap: 1.2rem; }
+  .index { color: rgb(251 146 60); font: 600 .75rem/1 ui-monospace, monospace; }
+  time { color: rgb(107 114 128); font: 500 .72rem/1.5 ui-monospace, monospace; }
+  :global(.dark) time { color: rgb(156 163 175); }
+  .experience-role { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+  h3 { font-size: 1.08rem; font-weight: 700; line-height: 1.35; letter-spacing: -.02em; }
+  .experience-role p { margin-top: .35rem; color: rgb(249 115 22); font-size: .9rem; font-weight: 600; }
+  .current { display: inline-flex; align-items: center; gap: .4rem; border-radius: 999px; padding: .35rem .55rem; color: rgb(22 163 74); background: rgb(34 197 94 / .09); font: 600 .65rem/1 ui-monospace, monospace; }
+  .current i { width: .38rem; height: .38rem; border-radius: 50%; background: rgb(34 197 94); box-shadow: 0 0 0 .2rem rgb(34 197 94 / .12); animation: pulse 2s infinite; }
+  .experience-copy p { color: rgb(75 85 99); font-size: .92rem; line-height: 1.75; }
+  :global(.dark) .experience-copy p { color: rgb(209 213 219); }
+  .experience-copy a { display: inline-flex; gap: .35rem; margin-top: 1rem; color: rgb(234 88 12); font-size: .85rem; font-weight: 600; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 .38rem rgb(34 197 94 / 0); } }
+  @media (max-width: 860px) { .experience-item { grid-template-columns: .35fr 1fr; } .experience-copy { grid-column: 2; } }
+  @media (max-width: 560px) { .experience-item { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; } .experience-meta { flex-direction: row; align-items: center; justify-content: space-between; } .experience-copy { grid-column: auto; } }
+  @media (prefers-reduced-motion: reduce) { .current i { animation: none; } }
+</style>

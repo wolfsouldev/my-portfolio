@@ -1,93 +1,81 @@
 ---
-import { User } from "lucide-react";
+import { MapPin, User } from "lucide-react";
 
-const personalImageAlt = "Alejandro Fajardo";
+const personalImageAlt = "Alejandro Alberto Fajardo";
 ---
 
-<h2
-  class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
->
-  <User className="size-8" />
-  Sobre mí
-</h2>
-<article
-  class="flex flex-col items-center justify-center gap-8 text-gray-700 dark:text-gray-300 md:flex-row"
->
-  <div
-    class="[&>p]:mb-4 [&>p>strong]:text-orange-500 dark:[&>p>strong]:text-orange-300 [&>p>strong]:font-normal [&>p>strong]:font-mono text-pretty order-2 md:order-1"
-  >
-    <p>
-      Me llamo Alejandro Alberto Fajardo y estoy especializado en <strong
-        >desarrollo backend</strong
-      >, con amplia experiencia en arquitecturas basadas en <strong
-        >microservicios</strong
-      >, servidores y entornos <strong>Docker</strong>. Aunque mi enfoque
-      principal es el backend, también cuento con conocimientos sólidos en <strong
-        >desarrollo frontend</strong
-      > y experiencia en <strong>desarrollo móvil con React Native</strong>, lo
-      que me permite abordar proyectos con una visión integral y orientada a la
-      solución.
-    </p>
+<div class="about-shell">
+  <header class="about-heading">
+    <div>
+      <span>Perfil</span>
+      <h2><User className="size-8" /> Sobre mí</h2>
+    </div>
+    <p>Backend first · Full-stack cuando el producto lo necesita</p>
+  </header>
 
-    <p>
-      Me caracteriza una fuerte atención al detalle, la capacidad de trabajar en
-      entornos exigentes y el compromiso con la calidad del software. Busco un
-      rol desafiante en una organización dinámica donde pueda aplicar mis
-      habilidades para contribuir al diseño y desarrollo de soluciones
-      tecnológicas innovadoras.
-    </p>
-  </div>
+  <article class="about-card">
+    <figure>
+      <img
+        width="520"
+        height="520"
+        src="/me_.jpg"
+        alt={personalImageAlt}
+        loading="lazy"
+      />
+      <figcaption><MapPin className="size-4" /> Cuba · Disponible en remoto</figcaption>
+    </figure>
 
-  <img
-    width="200"
-    height="200"
-    src="/me_.jpg"
-    alt={personalImageAlt}
-    class="order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-black/20 dark:bg-yellow-500/5 ring-1 ring-black/70 dark:ring-white/20 hover:scale-105 duration-200 transform"
-    style="object-position: 50% 50%"
-  />
-</article>
+    <div class="about-copy">
+      <p class="about-lead">
+        Construyo software que se mantiene sólido cuando el producto empieza a crecer.
+      </p>
+      <div>
+        <p>
+          Soy Alejandro Alberto Fajardo, desarrollador especializado en <strong>backend</strong>,
+          arquitecturas de <strong>microservicios</strong> y entornos <strong>Docker</strong>.
+          También trabajo con frontend y desarrollo móvil en React Native, lo que me permite
+          entender el producto completo y tomar mejores decisiones técnicas.
+        </p>
+        <p>
+          Me mueven la atención al detalle, la claridad en la arquitectura y la calidad del
+          software. Disfruto los retos donde hay que simplificar sistemas complejos, mejorar
+          rendimiento y convertir necesidades reales en soluciones fiables.
+        </p>
+      </div>
+      <ul aria-label="Áreas de especialización">
+        <li>Arquitectura</li>
+        <li>Microservicios</li>
+        <li>Cloud</li>
+        <li>Producto</li>
+      </ul>
+    </div>
+  </article>
+</div>
 
-<!-- FRASES PROHIBIDAS EN VUESTRO PORTFOLIO
-
-<p>
-  Mi sueño es encontrar mi primer empleo en el mundo de la programación. Una empresa donde pueda seguir aprendiendo. ❌
-</p>
-
-<p>
-  ❌ Apasionado de la programación desde chekitito. Me encantan los ordenadores y crear páginas web buenas y rápidas con la última tecnología.
-</p>
-
-<p>
-  Trabajo bien en equipo. Siempre estoy aprendiendo cosas nuevas.
-</p>
-
--------------------------------------
-
---------------------------------------
-
-<p>
-  ¡Soy Leo! Estudié Derecho Empresarial y, tras años ejerciendo, me pasé al mundo de la Programación. Desde entonces disfruto creando experiencias web para los usuarios.
-</p>
-
-<p>
-  Entre mis éxitos destaco que durante el Grado Superior, ayudé a mis compañeros a aprender sobre TDD. Me encanta el testing, creo en su importancia, y me gusta compartir mi conocimiento sobre ello.
-</p>
-
-<p>
-  Cuento con experiencia desarrollando aplicaciones móviles, y he creado una iniciativa llamada X para mezclar mis dos pasiones: la programación y el derecho. Ayudando a la sociedad a acceso a una defensa justa.
-</p>
-
----------------------------------------
-
-<p>Me llamo Sara, tengo 25 años y soy de Santiago, Chile 🇨🇱. Terminé mis estudios como Desarrolladora Web. Me encanta enfocarme en la parte del rendimiento, para ofrecer la mejora experiencia al usuario.</p>
-
-<p>
-  Colaboro en la organización del MeetUp local BeerJS donde reunimos a desarrolladores de Santiago para compartir conocimiento y experiencias. El año 2023 hicimos un total de 25 charlas con más de 2000 asistentes.
-</p>
-
-<p>
-  Además de participar activamente en la comunidad, he participado en la Hackathon de Midudev quedando en 3er puesto con mi proyecto _Chatty_, donde usando IA podías interactuar con un PDF. ¡Échale un vistazo!
-</p>
-
--->
+<style>
+  .about-shell { padding: 1rem 0; }
+  .about-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
+  .about-heading span { color: rgb(251 146 60); font: 600 .72rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
+  .about-heading h2 { display: flex; align-items: center; gap: .75rem; margin-top: .45rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -.045em; }
+  .about-heading > p { color: rgb(107 114 128); font-size: .88rem; }
+  :global(.dark) .about-heading > p { color: rgb(156 163 175); }
+  .about-card { display: grid; grid-template-columns: minmax(16rem, .72fr) 1.28fr; overflow: hidden; border: 1px solid rgb(0 0 0 / .09); border-radius: 1.75rem; background: rgb(255 255 255 / .58); }
+  :global(.dark) .about-card { border-color: rgb(255 255 255 / .1); background: rgb(10 15 28 / .68); }
+  figure { position: relative; min-height: 31rem; overflow: hidden; }
+  figure::after { position: absolute; inset: 0; background: linear-gradient(to top, rgb(2 6 23 / .72), transparent 50%); content: ""; }
+  figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .about-card:hover figure img { transform: scale(1.035); }
+  figcaption { position: absolute; z-index: 1; bottom: 1.25rem; left: 1.25rem; display: flex; align-items: center; gap: .5rem; color: white; font: 500 .75rem/1 ui-monospace, monospace; }
+  .about-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 4.5rem); }
+  .about-lead { max-width: 36rem; margin-bottom: 2rem; font-size: clamp(1.65rem, 3vw, 2.65rem); font-weight: 650; line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
+  .about-copy > div { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; color: rgb(75 85 99); font-size: .94rem; line-height: 1.75; }
+  :global(.dark) .about-copy > div { color: rgb(209 213 219); }
+  .about-copy strong { color: rgb(234 88 12); font-weight: 600; }
+  :global(.dark) .about-copy strong { color: rgb(253 186 116); }
+  .about-copy ul { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgb(0 0 0 / .09); }
+  :global(.dark) .about-copy ul { border-color: rgb(255 255 255 / .1); }
+  .about-copy li { border-radius: 999px; padding: .45rem .75rem; color: rgb(107 114 128); background: rgb(0 0 0 / .04); font: 500 .72rem/1 ui-monospace, monospace; }
+  :global(.dark) .about-copy li { color: rgb(209 213 219); background: rgb(255 255 255 / .055); }
+  @media (max-width: 800px) { .about-heading { align-items: start; flex-direction: column; gap: .75rem; } .about-card { grid-template-columns: 1fr; } figure { min-height: 24rem; } .about-copy > div { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { figure img { transition: none; } }
+</style>
