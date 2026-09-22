@@ -70,12 +70,24 @@ export const TextParallaxContentExample = () => {
             <div className="p-5 md:p-7">
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
-                  <span className="font-mono text-[11px] font-medium tracking-[.12em] text-orange-400">
-                    PRJ / {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-[11px] font-medium tracking-[.12em] text-orange-400">
+                      PRJ / {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {project.featured ? (
+                      <span className="rounded-full border border-orange-400/35 bg-orange-400/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[.08em] text-orange-500 dark:text-orange-300">
+                        Proyecto principal
+                      </span>
+                    ) : null}
+                  </div>
                   <h3 className="mt-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {project.title}
                   </h3>
+                  {project.role ? (
+                    <p className="mt-2 font-mono text-xs uppercase tracking-[.08em] text-gray-500 dark:text-gray-400">
+                      {project.role}
+                    </p>
+                  ) : null}
                 </div>
                 <span className="mt-2 size-2 shrink-0 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(251,146,60,.8)] transition-transform duration-300 group-hover:scale-150" />
               </div>
@@ -83,6 +95,17 @@ export const TextParallaxContentExample = () => {
               <p className="project-description text-[.96rem] leading-7 text-gray-700 dark:text-gray-200">
                 {project.desc.replace(/^“/, "")}
               </p>
+
+              {project.highlights ? (
+                <ul className="mt-5 grid gap-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                  {project.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-2">
+                      <span className="mt-[.62rem] size-1.5 shrink-0 rounded-full bg-orange-400" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
 
               <ul className="mt-6 flex flex-wrap gap-2" aria-label={`Tecnologías utilizadas en ${project.title}`}>
                 {project.tech.map((tech) => (

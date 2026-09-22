@@ -7,21 +7,23 @@ const EXPERIENCE = [
     title: "Principal Software Engineer",
     company: "Cute Digital Media",
     description:
-      "Mantenimiento y evolución de productos basados en microservicios y sistemas multitenant. Reestructuración de plataformas para mejorar escalabilidad, seguridad y eficiencia, incorporando mejores prácticas de desarrollo.",
+      "Diseño, evolución y mantenimiento de plataformas basadas en arquitecturas de microservicios y sistemas multitenant. Desarrollo e integración de múltiples servicios y APIs, trabajando con plataformas de procesamiento de pagos como Stripe, PayPal, Prospay y Fiserv. Implementación de soluciones de automatización e inteligencia artificial para optimizar procesos internos, incluyendo flujos automatizados de revisión de Pull Requests, integración de herramientas de IA y automatizaciones mediante n8n. Participación en la definición de arquitecturas orientadas a escalabilidad, seguridad, observabilidad y eficiencia operativa.",
   },
+
   {
     date: "Septiembre 2023 — 2024",
     title: "Full-Stack Engineer",
     company: "Tecopos",
     description:
-      "Lideré la migración de una arquitectura monolítica a microservicios. Desarrollé y optimicé funcionalidades de frontend y backend, además de implementar CI/CD y estrategias de despliegue automatizado.",
+      "Mantenimiento, evolución y modernización de un sistema legacy, incorporando nuevas tecnologías y mejores prácticas sin comprometer la operación de los sistemas existentes. Participación en la migración progresiva de una arquitectura monolítica hacia microservicios, desarrollando y optimizando funcionalidades de frontend y backend. Implementación y administración de entornos con Docker, configuración de balanceadores de carga y optimización de bases de datos para mejorar el rendimiento y la escalabilidad. Implementación de pipelines CI/CD y estrategias de despliegue automatizado para agilizar y estandarizar el ciclo de desarrollo.",
   },
+
   {
     date: "Octubre 2021 — 2022",
     title: "Principal Backend Engineer",
     company: "UNE Mtz",
     description:
-      "Diseño, desarrollo y mantenimiento del sistema principal de la empresa. Automaticé procesos clave, implementé integración continua y A/B testing, y lideré dos equipos de desarrollo.",
+      "Diseño, desarrollo y mantenimiento del sistema principal de la empresa, participando en decisiones de arquitectura y evolución de la plataforma. Automatización de procesos clave, implementación de integración continua y desarrollo de estrategias de A/B testing para evaluar y mejorar funcionalidades. Liderazgo técnico de dos equipos de desarrollo, estableciendo buenas prácticas de desarrollo, revisión de código y coordinación de entregas.",
   },
 ];
 ---
@@ -32,28 +34,80 @@ const EXPERIENCE = [
       <span>Trayectoria</span>
       <h2><Briefcase className="size-8" /> Experiencia</h2>
     </div>
-    <p>Construyendo y modernizando productos digitales desde 2021.</p>
   </header>
 
   <ol class="experience-list">
-    {EXPERIENCE.map((experience, index) => (
-      <li>
-        <ExperienceItem {...experience} index={index + 1} current={index === 0} />
-      </li>
-    ))}
+    {
+      EXPERIENCE.map((experience, index) => (
+        <li>
+          <ExperienceItem
+            {...experience}
+            index={index + 1}
+            current={index === 0}
+          />
+        </li>
+      ))
+    }
   </ol>
 </div>
 
 <style>
-  .experience-shell { padding: 1rem 0; }
-  .experience-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
-  .experience-heading span { color: rgb(251 146 60); font: 600 .72rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
-  .experience-heading h2 { display: flex; align-items: center; gap: .75rem; margin-top: .45rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -.045em; }
-  .experience-heading > p { max-width: 27rem; color: rgb(107 114 128); line-height: 1.7; }
-  :global(.dark) .experience-heading > p { color: rgb(156 163 175); }
-  .experience-list { overflow: hidden; border: 1px solid rgb(0 0 0 / .09); border-radius: 1.75rem; background: rgb(255 255 255 / .55); }
-  :global(.dark) .experience-list { border-color: rgb(255 255 255 / .1); background: rgb(10 15 28 / .64); }
-  .experience-list > li + li { border-top: 1px solid rgb(0 0 0 / .09); }
-  :global(.dark) .experience-list > li + li { border-color: rgb(255 255 255 / .1); }
-  @media (max-width: 640px) { .experience-heading { align-items: start; flex-direction: column; gap: .75rem; } }
+  .experience-shell {
+    padding: 1rem 0;
+  }
+  .experience-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .experience-heading span {
+    color: rgb(251 146 60);
+    font:
+      600 0.72rem/1 ui-monospace,
+      monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .experience-heading h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.45rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+  }
+  .experience-heading > p {
+    max-width: 27rem;
+    color: rgb(107 114 128);
+    line-height: 1.7;
+  }
+  :global(.dark) .experience-heading > p {
+    color: rgb(156 163 175);
+  }
+  .experience-list {
+    overflow: hidden;
+    border: 1px solid rgb(0 0 0 / 0.09);
+    border-radius: 1.75rem;
+    background: rgb(255 255 255 / 0.55);
+  }
+  :global(.dark) .experience-list {
+    border-color: rgb(255 255 255 / 0.1);
+    background: rgb(10 15 28 / 0.64);
+  }
+  .experience-list > li + li {
+    border-top: 1px solid rgb(0 0 0 / 0.09);
+  }
+  :global(.dark) .experience-list > li + li {
+    border-color: rgb(255 255 255 / 0.1);
+  }
+  @media (max-width: 640px) {
+    .experience-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
 </style>
