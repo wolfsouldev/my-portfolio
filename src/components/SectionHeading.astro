@@ -1,0 +1,19 @@
+---
+interface Props {
+  index: string;
+  kicker: string;
+  title: string;
+  description: string;
+}
+const { index, kicker, title, description } = Astro.props;
+---
+<header class="cosmic-heading" data-reveal>
+  <div>
+    <span class="cosmic-kicker"><span class="cosmic-sector">{index} /</span>{kicker}</span>
+    <h2 class="cosmic-title"><slot name="icon" />{title}</h2>
+    <p class="cosmic-caption">{description}</p>
+  </div>
+  <div class="cosmic-heading-extra">
+    {Astro.slots.has("extra") ? <slot name="extra" /> : <span class="cosmic-marker">SECTOR / {index}</span>}
+  </div>
+</header>

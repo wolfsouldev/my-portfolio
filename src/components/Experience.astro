@@ -1,11 +1,13 @@
 ---
-import { Briefcase } from "lucide-react";
+import { Orbit, Radio } from "lucide-react";
 import ExperienceItem from "./ExperienceItem.astro";
+import SectionHeading from "./SectionHeading.astro";
 const EXPERIENCE = [
   {
     date: "Octubre 2026 — Actualidad",
     title: "Principal Backend Engineer",
     company: "DynamiCore",
+    focus: ["Core financiero", "AWS Lambda", "Integración bancaria", "Bases de datos"],
     description:
       "Desarrollo y evolución de un core financiero basado en una arquitectura de microservicios, con un rol principal en la construcción de soluciones backend. Diseño e implementación de servicios y procesos serverless en AWS Lambda, integración con servicios bancarios y coordinación de flujos transaccionales entre sistemas. Trabajo intensivo con bases de datos: modelado, optimización de consultas y gestión de la integridad y consistencia de la información. Desarrollo de procesos asíncronos, control de concurrencia y cargas masivas de usuarios, datos y contenidos, con foco en el rendimiento, la escalabilidad y la trazabilidad de las operaciones. Participación en decisiones técnicas y en la mejora continua de la estabilidad, el manejo de errores y la mantenibilidad de servicios críticos para la operación financiera.",
   },
@@ -14,6 +16,7 @@ const EXPERIENCE = [
     date: "Septiembre 2024 — Octubre 2026",
     title: "Principal Software Engineer",
     company: "Cute Digital Media",
+    focus: ["Microservicios", "Pagos digitales", "Automatización · IA"],
     description:
       "Diseño, evolución y mantenimiento de plataformas basadas en arquitecturas de microservicios y sistemas multitenant. Desarrollo e integración de múltiples servicios y APIs, trabajando con plataformas de procesamiento de pagos como Stripe, PayPal, Prospay y Fiserv. Implementación de soluciones de automatización e inteligencia artificial para optimizar procesos internos, incluyendo flujos automatizados de revisión de Pull Requests, integración de herramientas de IA y automatizaciones mediante n8n. Participación en la definición de arquitecturas orientadas a escalabilidad, seguridad, observabilidad y eficiencia operativa.",
   },
@@ -22,6 +25,7 @@ const EXPERIENCE = [
     date: "Septiembre 2023 — 2024",
     title: "Full-Stack Engineer",
     company: "Tecopos",
+    focus: ["Modernización legacy", "Docker", "CI/CD"],
     description:
       "Mantenimiento, evolución y modernización de un sistema legacy, incorporando nuevas tecnologías y mejores prácticas sin comprometer la operación de los sistemas existentes. Participación en la migración progresiva de una arquitectura monolítica hacia microservicios, desarrollando y optimizando funcionalidades de frontend y backend. Implementación y administración de entornos con Docker, configuración de balanceadores de carga y optimización de bases de datos para mejorar el rendimiento y la escalabilidad. Implementación de pipelines CI/CD y estrategias de despliegue automatizado para agilizar y estandarizar el ciclo de desarrollo.",
   },
@@ -30,6 +34,7 @@ const EXPERIENCE = [
     date: "Octubre 2021 — 2022",
     title: "Principal Backend Engineer",
     company: "UNE Mtz",
+    focus: ["Backend", "Liderazgo técnico", "Integración continua"],
     description:
       "Diseño, desarrollo y mantenimiento del sistema principal de la empresa, participando en decisiones de arquitectura y evolución de la plataforma. Automatización de procesos clave, implementación de integración continua y desarrollo de estrategias de A/B testing para evaluar y mejorar funcionalidades. Liderazgo técnico de dos equipos de desarrollo, estableciendo buenas prácticas de desarrollo, revisión de código y coordinación de entregas.",
   },
@@ -37,85 +42,76 @@ const EXPERIENCE = [
 ---
 
 <div class="experience-shell">
-  <header class="experience-heading">
-    <div>
-      <span>Trayectoria</span>
-      <h2><Briefcase className="size-8" /> Experiencia</h2>
+  <SectionHeading index="01" kicker="Bitácora profesional" title="Experiencia" description="Mi recorrido construyendo sistemas, conectando ideas y explorando nuevos retos.">
+    <Orbit slot="icon" aria-hidden="true" />
+    <div class="mission-signal" slot="extra">
+      <span class="signal-orbit" aria-hidden="true"><i></i><i></i></span>
+      <span><Radio size={13} aria-hidden="true" /> En órbita <b>·</b> {EXPERIENCE[0].company}</span>
     </div>
-  </header>
+  </SectionHeading>
 
-  <ol class="experience-list">
-    {
-      EXPERIENCE.map((experience, index) => (
-        <li>
-          <ExperienceItem
-            {...experience}
-            index={index + 1}
-            current={index === 0}
-          />
-        </li>
-      ))
-    }
-  </ol>
+  <div class="trajectory">
+    <div class="trajectory-rail" aria-hidden="true"></div>
+    <ol class="experience-list" aria-label="Trayectoria profesional, de la más reciente a la más antigua">
+      {
+        EXPERIENCE.map((experience, index) => (
+          <li class="experience-stop" style={`--entry-delay: ${index * 60}ms`}>
+            <ExperienceItem {...experience} index={index + 1} current={index === 0} />
+          </li>
+        ))
+      }
+    </ol>
+    <div class="trajectory-end" aria-hidden="true"><span>✦</span> El viaje continúa</div>
+  </div>
 </div>
 
+<script>
+  const stops = document.querySelectorAll<HTMLElement>(".experience-stop");
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("is-pending");
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0, rootMargin: "0px 0px -24px 0px" });
+    stops.forEach((stop) => {
+      // Progressive enhancement: cards are visible when JavaScript is unavailable.
+      stop.classList.add("is-pending");
+      observer.observe(stop);
+    });
+  }
+</script>
+
 <style>
-  .experience-shell {
-    padding: 1rem 0;
+  .mission-signal { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 0 1rem; flex-shrink: 0; }
+  .mission-signal > span:last-child { display: flex; align-items: center; gap: .45rem; color: rgb(109 40 217); font: 500 .65rem/1.5 ui-monospace, monospace; }
+  :global(.dark) .mission-signal > span:last-child { color: rgb(196 181 253); }
+  .mission-signal b { font-weight: 400; opacity: .5; }
+  .signal-orbit { position: relative; display: block; width: 5.5rem; height: 5.5rem; border: 1px solid rgb(139 92 246 / .25); border-radius: 50%; background: radial-gradient(circle, rgb(249 115 22 / .12), transparent 65%); }
+  .signal-orbit::before, .signal-orbit::after { content: ""; position: absolute; border-radius: 50%; }
+  .signal-orbit::before { inset: 11px; border: 1px dashed rgb(139 92 246 / .3); }
+  .signal-orbit::after { inset: 33px; background: rgb(251 146 60); box-shadow: 0 0 24px rgb(249 115 22 / .5); }
+  .signal-orbit i { position: absolute; inset: -1px; border-radius: 50%; animation: orbit-spin 24s linear infinite; }
+  .signal-orbit i::before { content: ""; position: absolute; top: -2px; left: calc(50% - 2px); width: 5px; height: 5px; border-radius: 50%; background: rgb(167 139 250); box-shadow: 0 0 12px rgb(139 92 246 / .6); }
+  .signal-orbit i + i { inset: 10px; animation-duration: 16s; animation-direction: reverse; }
+  .signal-orbit i + i::before { background: rgb(251 146 60); }
+  .trajectory { position: relative; }
+  .trajectory-rail { position: absolute; left: 187px; top: 44px; bottom: 25px; width: 1px; background: linear-gradient(to bottom, rgb(249 115 22 / .65), rgb(139 92 246 / .35) 45%, rgb(139 92 246 / .1)); }
+  .experience-list { position: relative; display: grid; gap: 1.5rem; }
+  .experience-stop { min-width: 0; opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); transition-delay: var(--entry-delay, 0ms); }
+  .experience-stop.is-pending { opacity: 0; transform: translateY(22px); }
+  .trajectory-end { display: flex; align-items: center; gap: .7rem; margin: 1.75rem 0 0 180px; color: rgb(107 114 128); font: 500 .65rem/1.5 ui-monospace, monospace; letter-spacing: .08em; }
+  .trajectory-end span { color: rgb(139 92 246); font-size: 1rem; }
+  @keyframes orbit-spin { to { transform: rotate(360deg); } }
+  @media (max-width: 760px) {
+    .mission-signal { display: none; }
+    .trajectory-rail { left: 7px; top: 8px; }
+    .trajectory-end { margin-left: 0; }
   }
-  .experience-heading {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-  .experience-heading span {
-    color: rgb(251 146 60);
-    font:
-      600 0.72rem/1 ui-monospace,
-      monospace;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .experience-heading h2 {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.45rem;
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 700;
-    letter-spacing: -0.045em;
-  }
-  .experience-heading > p {
-    max-width: 27rem;
-    color: rgb(107 114 128);
-    line-height: 1.7;
-  }
-  :global(.dark) .experience-heading > p {
-    color: rgb(156 163 175);
-  }
-  .experience-list {
-    overflow: hidden;
-    border: 1px solid rgb(0 0 0 / 0.09);
-    border-radius: 1.75rem;
-    background: rgb(255 255 255 / 0.55);
-  }
-  :global(.dark) .experience-list {
-    border-color: rgb(255 255 255 / 0.1);
-    background: rgb(10 15 28 / 0.64);
-  }
-  .experience-list > li + li {
-    border-top: 1px solid rgb(0 0 0 / 0.09);
-  }
-  :global(.dark) .experience-list > li + li {
-    border-color: rgb(255 255 255 / 0.1);
-  }
-  @media (max-width: 640px) {
-    .experience-heading {
-      align-items: start;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .signal-orbit i { animation: none; }
+    .experience-stop, .experience-stop.is-pending { opacity: 1; transform: none; transition: none; }
   }
 </style>

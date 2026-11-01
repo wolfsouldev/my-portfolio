@@ -1,52 +1,122 @@
 ---
+import { ArrowUpRight, Orbit, Radio } from "lucide-react";
+
 interface Props {
   title: string;
   company: string;
   description: string;
+  focus?: string[];
   link?: string;
   date: string;
   index: number;
   current: boolean;
 }
 
-const { title, company, description, link, date, index, current } = Astro.props;
+const { title, company, description, focus = [], link, date, index, current } = Astro.props;
+// Keep every sentence; smaller paragraphs make the flight log easier to scan.
+const sentences = description.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g) ?? [description];
+const midpoint = Math.ceil(sentences.length / 2);
+const paragraphs = [sentences.slice(0, midpoint).join(" "), sentences.slice(midpoint).join(" ")]
+  .map((paragraph) => paragraph.trim()).filter(Boolean);
 ---
 
-<article class="experience-item">
+<article class:list={["experience-item", { "is-current": current }]}>
   <div class="experience-meta">
-    <span class="index">{String(index).padStart(2, "0")}</span>
+    <span class="index"><span aria-hidden="true">LOG / </span>{String(index).padStart(2, "0")}</span>
     <time>{date}</time>
   </div>
-  <div class="experience-role">
-    <div>
-      <h3>{title}</h3>
-      <p>{company}</p>
+  <span class="orbit-node" aria-hidden="true"><span></span></span>
+
+  <div class="experience-card cosmic-panel">
+    <svg class="card-constellation" viewBox="0 0 260 150" fill="none" aria-hidden="true">
+      <path d="m20 105 55-60 59 31 48-48 54 33M75 45l29 77 30-46" stroke="currentColor" stroke-width=".7" />
+      <g fill="currentColor"><circle cx="20" cy="105" r="2"/><circle cx="75" cy="45" r="3"/><circle cx="134" cy="76" r="2.5"/><circle cx="182" cy="28" r="2"/><circle cx="236" cy="61" r="3"/><circle cx="104" cy="122" r="1.5"/></g>
+    </svg>
+    <header class="experience-role">
+      <div class="role-heading">
+        <p class="company"><Orbit size={16} aria-hidden="true" />{company}</p>
+        <h3>{title}</h3>
+      </div>
+      {current && <span class="current"><Radio size={12} aria-hidden="true" /><span>Actual</span></span>}
+    </header>
+    <div class="experience-copy">
+      {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
-    {current && <span class="current"><i></i> Actual</span>}
-  </div>
-  <div class="experience-copy">
-    <p>{description}</p>
-    {link && <a href={link}>Saber más <span aria-hidden="true">↗</span></a>}
+    {focus.length > 0 && (
+      <ul class="focus-list" aria-label={`Áreas de enfoque en ${company}`}>
+        {focus.map((area) => <li><span aria-hidden="true"></span>{area}</li>)}
+      </ul>
+    )}
+    {link && <a class="experience-link" href={link}>Saber más <ArrowUpRight size={14} aria-hidden="true" /></a>}
   </div>
 </article>
 
 <style>
-  .experience-item { display: grid; grid-template-columns: .55fr 1fr 1.5fr; gap: 2rem; padding: 2rem; transition: background .3s ease; }
-  .experience-item:hover { background: rgb(249 115 22 / .035); }
-  .experience-meta { display: flex; flex-direction: column; gap: 1.2rem; }
-  .index { color: rgb(251 146 60); font: 600 .75rem/1 ui-monospace, monospace; }
-  time { color: rgb(107 114 128); font: 500 .72rem/1.5 ui-monospace, monospace; }
+  .experience-item { position: relative; display: grid; grid-template-columns: 10rem minmax(0, 1fr); align-items: start; gap: 3.5rem; }
+  .experience-meta { display: flex; flex-direction: column; gap: .85rem; padding-top: 2rem; }
+  .index { color: rgb(109 40 217); font: 600 .67rem/1.4 ui-monospace, monospace; letter-spacing: .13em; }
+  .index > span { opacity: .65; }
+  .is-current .index { color: rgb(194 65 12); }
+  time { color: rgb(75 85 99); font: 500 .7rem/1.7 ui-monospace, monospace; }
+  .orbit-node { position: absolute; left: 180px; top: 37px; display: grid; place-items: center; width: 15px; height: 15px; border: 1px solid rgb(139 92 246 / .45); border-radius: 50%; background: rgb(245 243 255); transition: box-shadow .35s ease; }
+  .orbit-node > span { width: 5px; height: 5px; border-radius: 50%; background: rgb(139 92 246); }
+  .is-current .orbit-node { border-color: rgb(249 115 22 / .6); box-shadow: 0 0 0 5px rgb(249 115 22 / .07), 0 0 24px rgb(249 115 22 / .2); }
+  .is-current .orbit-node > span { background: rgb(249 115 22); }
+  .experience-item:hover .orbit-node { box-shadow: 0 0 0 5px rgb(139 92 246 / .09), 0 0 22px rgb(139 92 246 / .2); }
+  .experience-card { position: relative; isolation: isolate; overflow: hidden; min-width: 0; border: 1px solid rgb(139 92 246 / .15); border-radius: 1.4rem; padding: var(--panel-padding); background: linear-gradient(125deg, rgb(255 255 255 / .95), rgb(245 243 255 / .8)); box-shadow: 0 14px 45px -30px rgb(76 29 149 / .18); transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+  .experience-card::before { content: ""; position: absolute; z-index: -1; top: -70px; right: -70px; width: 250px; height: 200px; pointer-events: none; background: radial-gradient(ellipse, rgb(139 92 246 / .08), transparent 70%); }
+  .experience-card::after { content: ""; position: absolute; top: 0; left: 2rem; right: 2rem; height: 1px; background: linear-gradient(90deg, transparent, rgb(167 139 250 / .6), transparent); }
+  .is-current .experience-card { border-color: rgb(249 115 22 / .28); }
+  .is-current .experience-card::after { background: linear-gradient(90deg, transparent, rgb(251 146 60 / .8), rgb(167 139 250 / .3), transparent); }
+  .experience-item:hover .experience-card { transform: translateY(-3px); border-color: rgb(139 92 246 / .4); box-shadow: 0 18px 55px -32px rgb(139 92 246 / .3); }
+  .is-current:hover .experience-card { border-color: rgb(249 115 22 / .5); }
+  .card-constellation { position: absolute; z-index: -1; top: 0; right: 0; width: 240px; height: auto; pointer-events: none; color: rgb(139 92 246); opacity: .12; transition: opacity .4s ease; }
+  .experience-item:hover .card-constellation { opacity: .28; }
+  .experience-role { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: 1.3rem; }
+  .role-heading { min-width: 0; }
+  .company { display: flex; align-items: center; gap: .5rem; color: rgb(109 40 217); font: 600 .75rem/1.5 ui-monospace, monospace; }
+  .company :global(svg) { flex-shrink: 0; }
+  .is-current .company { color: rgb(194 65 12); }
+  h3 { margin-top: .45rem; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 650; line-height: 1.4; letter-spacing: -.025em; }
+  .current { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; flex-shrink: 0; border: 1px solid rgb(22 163 74 / .2); border-radius: 999px; padding: .4rem .6rem; color: rgb(21 128 61); background: rgb(34 197 94 / .07); font: 600 .63rem/1 ui-monospace, monospace; }
+  .current :global(svg) { animation: signal-glow 3s ease-in-out infinite; }
+  .experience-copy { display: grid; gap: .85rem; }
+  .experience-copy p { color: rgb(75 85 99); font-size: .92rem; line-height: 1.85; }
+  .focus-list { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid rgb(139 92 246 / .1); }
+  .focus-list li { display: inline-flex; align-items: center; gap: .4rem; border: 1px solid rgb(139 92 246 / .12); border-radius: .45rem; padding: .4rem .6rem; color: rgb(75 85 99); background: rgb(139 92 246 / .035); font: 500 .65rem/1.3 ui-monospace, monospace; }
+  .focus-list li > span { width: 3px; height: 3px; flex-shrink: 0; border-radius: 50%; background: rgb(139 92 246); }
+  .is-current .focus-list li > span { background: rgb(249 115 22); }
+  .experience-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; color: rgb(194 65 12); font-size: .85rem; font-weight: 600; border-radius: .25rem; }
+  .experience-link:focus-visible { outline: 2px solid rgb(249 115 22); outline-offset: 4px; }
   :global(.dark) time { color: rgb(156 163 175); }
-  .experience-role { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
-  h3 { font-size: 1.08rem; font-weight: 700; line-height: 1.35; letter-spacing: -.02em; }
-  .experience-role p { margin-top: .35rem; color: rgb(249 115 22); font-size: .9rem; font-weight: 600; }
-  .current { display: inline-flex; align-items: center; gap: .4rem; border-radius: 999px; padding: .35rem .55rem; color: rgb(22 163 74); background: rgb(34 197 94 / .09); font: 600 .65rem/1 ui-monospace, monospace; }
-  .current i { width: .38rem; height: .38rem; border-radius: 50%; background: rgb(34 197 94); box-shadow: 0 0 0 .2rem rgb(34 197 94 / .12); animation: pulse 2s infinite; }
-  .experience-copy p { color: rgb(75 85 99); font-size: .92rem; line-height: 1.75; }
+  :global(.dark) .index, :global(.dark) .company { color: rgb(196 181 253); }
+  :global(.dark) .is-current .index, :global(.dark) .is-current .company { color: rgb(251 146 60); }
+  :global(.dark) .orbit-node { background: rgb(15 17 36); }
+  :global(.dark) .experience-card { border-color: rgb(167 139 250 / .17); background: linear-gradient(125deg, rgb(15 19 37 / .97), rgb(9 13 27 / .95)); box-shadow: 0 16px 48px -32px rgb(0 0 0 / .6); }
+  :global(.dark) .is-current .experience-card { border-color: rgb(251 146 60 / .27); }
+  :global(.dark) .experience-item:hover .experience-card { border-color: rgb(167 139 250 / .4); box-shadow: 0 18px 55px -32px rgb(139 92 246 / .3); }
+  :global(.dark) .is-current:hover .experience-card { border-color: rgb(251 146 60 / .5); }
+  :global(.dark) .current { color: rgb(134 239 172); border-color: rgb(74 222 128 / .2); }
   :global(.dark) .experience-copy p { color: rgb(209 213 219); }
-  .experience-copy a { display: inline-flex; gap: .35rem; margin-top: 1rem; color: rgb(234 88 12); font-size: .85rem; font-weight: 600; }
-  @keyframes pulse { 50% { box-shadow: 0 0 0 .38rem rgb(34 197 94 / 0); } }
-  @media (max-width: 860px) { .experience-item { grid-template-columns: .35fr 1fr; } .experience-copy { grid-column: 2; } }
-  @media (max-width: 560px) { .experience-item { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; } .experience-meta { flex-direction: row; align-items: center; justify-content: space-between; } .experience-copy { grid-column: auto; } }
-  @media (prefers-reduced-motion: reduce) { .current i { animation: none; } }
+  :global(.dark) .focus-list { border-color: rgb(167 139 250 / .12); }
+  :global(.dark) .focus-list li { color: rgb(196 195 213); border-color: rgb(167 139 250 / .15); background: rgb(167 139 250 / .045); }
+  :global(.dark) .experience-link { color: rgb(251 146 60); }
+  @keyframes signal-glow { 50% { opacity: .45; } }
+  @media (max-width: 760px) {
+    .experience-item { grid-template-columns: minmax(0, 1fr); gap: .8rem; padding-left: 2rem; }
+    .experience-meta { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding-top: 0; }
+    .orbit-node { left: 0; top: 3px; }
+    .experience-card { padding: var(--panel-padding); border-radius: 1.1rem; }
+    .experience-role { gap: .6rem; }
+    h3 { font-size: 1.12rem; }
+    .current { padding: .35rem .45rem; font-size: .6rem; }
+    .experience-copy p { font-size: .9rem; line-height: 1.85; }
+    .card-constellation { width: 180px; }
+  }
+  @media (max-width: 380px) { .experience-role { flex-wrap: wrap; } }
+  @media (prefers-reduced-motion: reduce) {
+    .experience-card, .orbit-node, .card-constellation { transition: none; }
+    .experience-item:hover .experience-card { transform: none; }
+    .current :global(svg) { animation: none; }
+  }
 </style>

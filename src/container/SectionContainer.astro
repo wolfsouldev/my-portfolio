@@ -1,41 +1,10 @@
 ---
-import { motion } from "framer-motion";
-
 interface Props {
   class?: string;
   id: string;
-  animated?: boolean;
 }
-
-const { class: className, id, animated = true } = Astro.props;
+const { class: className, id } = Astro.props;
 ---
-
-{
-  animated && (
-    <motion.section
-      id={id}
-      data-section={id}
-      className={`section scroll-mt-24 ${className ?? ""} w-full mx-auto container lg:max-w-7xl md:max-w-3xl`}
-      initial={{ opacity: 0, y: 42 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.72,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      viewport={{ once: true, amount: id === "proyectos" ? "some" : 0.12 }}
-      client:visible
-    >
-      <slot />
-    </motion.section>
-  )
-}
-
-{
-  !animated && (
-    <section
-      class={`section ${className ?? ""} w-full mx-auto container lg:max-w-7xl md:max-w-3xl`}
-    >
-      <slot />
-    </section>
-  )
-}
+<section id={id} data-section={id} class:list={["section", "site-container", className]}>
+  <slot />
+</section>

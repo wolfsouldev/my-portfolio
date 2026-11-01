@@ -1,21 +1,24 @@
-
-<div class="w-1/2">
-
-    <picture id="animation" class="overflow-hidden"> </picture>
-</div>
-
+<div id="animation" class="astronaut-animation" role="img" aria-label="Astronauta escribiendo en su portátil"></div>
 <script>
   import animationData from "../lib/animationData.json";
   import Lottie from "lottie-web";
-
-  const container = document.getElementById("animation") as HTMLDivElement;
-  container.style.height = "30px";
-
-  Lottie.loadAnimation({
-    container: container,
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-  });
+  const container = document.getElementById("animation");
+  if (container) {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const animation = Lottie.loadAnimation({ container, renderer: "svg", loop: true, autoplay: !preference.matches, animationData });
+    const syncPlayback = () => {
+      if (preference.matches || document.hidden) animation.pause();
+      else animation.play();
+    };
+    animation.addEventListener("DOMLoaded", () => {
+      container.querySelector("svg")?.setAttribute("aria-hidden", "true");
+      if (preference.matches) animation.goToAndStop(45, true);
+      syncPlayback();
+    });
+    preference.addEventListener("change", syncPlayback);
+    document.addEventListener("visibilitychange", syncPlayback);
+  }
 </script>
+<style>
+  .astronaut-animation { display: block; width: 270px; height: 270px; }
+</style>

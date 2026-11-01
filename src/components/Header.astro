@@ -1,116 +1,115 @@
 ---
-
+import { Menu, Moon, Orbit, Sun, X } from "lucide-react";
 const navItems = [
-  {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "/#experiencia",
-  },
-  {
-    title: "Skills",
-    label: "skills",
-    url: "/#skills",
-  },
-  
-  {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-  },
-  {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "mailto:alejandrodev01@gmail.com",
-  },
+  { title: "Experiencia", id: "experiencia" },
+  { title: "Tecnologías", id: "skills" },
+  { title: "Sobre mí", id: "sobre-mi" },
+  { title: "Proyectos", id: "proyectos" },
+  { title: "Contacto", id: "contacto" },
 ];
 ---
-
-<header
-  class="fixed top-0 z-50 flex items-center justify-center w-full mx-auto mt-2" 
->
-  <nav
-    class="flex max-w-[calc(100vw-1rem)] items-center justify-start overflow-x-auto rounded-full px-3 text-sm font-medium text-gray-600 dark:text-gray-200 sm:justify-center sm:px-5"
-  >
-    {
-      navItems.map((link) => (
-        <a
-          class="relative block shrink-0 px-2 py-2 transition-colors hover:text-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 dark:hover:text-orange-400"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
-    <aside class="ml-5">
-      <!-- <ModeToggle client:load  /> -->
-    </aside>
-  </nav>
+<header class="site-header site-container">
+  <div class="nav-shell">
+    <a class="nav-brand" href="#inicio" aria-label="Alejandro Fajardo, volver al inicio"><Orbit size={20} aria-hidden="true" /><span>AF<span class="brand-suffix"> / dev</span></span></a>
+    <nav id="main-navigation" aria-label="Navegación principal">
+      {navItems.map((item, index) => <a href={`#${item.id}`} data-nav={item.id}><span class="nav-number" aria-hidden="true">0{index + 1}</span>{item.title}</a>)}
+    </nav>
+    <div class="nav-controls">
+      <button type="button" class="theme-toggle" aria-label="Cambiar a tema claro" title="Cambiar tema"><Sun className="sun-icon" size={17} aria-hidden="true" /><Moon className="moon-icon" size={17} aria-hidden="true" /></button>
+      <button type="button" class="menu-toggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="main-navigation"><Menu className="menu-icon" size={19} aria-hidden="true" /><X className="close-icon" size={19} aria-hidden="true" /></button>
+    </div>
+  </div>
 </header>
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section");
-    const navItems = document.querySelectorAll("header nav a");
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-orange-500");
-            } else {
-              item.classList.remove("text-orange-500");
-            }
-          });
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    });
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect();
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    };
+  const header = document.querySelector<HTMLElement>(".site-header")!;
+  const menu = header.querySelector<HTMLButtonElement>(".menu-toggle")!;
+  const themeButton = header.querySelector<HTMLButtonElement>(".theme-toggle")!;
+  const links = [...header.querySelectorAll<HTMLAnchorElement>("[data-nav]")];
+  header.dataset.menuReady = "true";
+  const closeMenu = () => {
+    header.dataset.menuOpen = "false";
+    menu.setAttribute("aria-expanded", "false");
+    menu.setAttribute("aria-label", "Abrir navegación");
+  };
+  menu.addEventListener("click", () => {
+    const open = menu.getAttribute("aria-expanded") !== "true";
+    header.dataset.menuOpen = String(open);
+    menu.setAttribute("aria-expanded", String(open));
+    menu.setAttribute("aria-label", open ? "Cerrar navegación" : "Abrir navegación");
   });
-</script>
-
-<style>
-  nav {
-    --nav-surface: rgb(255 255 255 / .62);
-    animation: nav-shadow 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
-  }
-
-  :global(.dark) nav {
-    --nav-surface: rgb(31 41 55 / .9);
-  }
-
-  @keyframes nav-shadow {
-    to {
-      background: var(--nav-surface);
-      box-shadow: 0 12px 32px rgb(15 23 42 / .16), inset 0 0 0 1px rgb(255 255 255 / .1);
-      backdrop-filter: blur(16px);
+  links.forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", (event) => { if (!header.contains(event.target as Node)) closeMenu(); });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") { closeMenu(); menu.focus(); }
+  });
+  const updateThemeLabel = () => {
+    const dark = document.documentElement.classList.contains("dark");
+    themeButton.setAttribute("aria-label", `Cambiar a tema ${dark ? "claro" : "oscuro"}`);
+  };
+  themeButton.addEventListener("click", () => {
+    const dark = document.documentElement.classList.toggle("dark");
+    try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch { /* Theme still works when storage is unavailable. */ }
+    updateThemeLabel();
+  });
+  updateThemeLabel();
+  const sections = [...document.querySelectorAll<HTMLElement>("main > [data-section]")];
+  const updateActive = () => {
+    let current = "inicio";
+    for (const section of sections) if (section.getBoundingClientRect().top <= 180) current = section.id;
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 8) {
+      current = sections.at(-1)?.id ?? current;
     }
+    links.forEach((link) => {
+      if (link.dataset.nav === current) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  let queued = false;
+  window.addEventListener("scroll", () => {
+    if (!queued) { queued = true; requestAnimationFrame(() => { updateActive(); queued = false; }); }
+  }, { passive: true });
+  window.addEventListener("resize", () => { closeMenu(); updateActive(); });
+  updateActive();
+</script>
+<style>
+  .site-header { position: fixed; inset-inline: 0; top: 1.25rem; z-index: 50; }
+  .nav-shell { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4rem; padding: .55rem .8rem .55rem 1.1rem; border: 1px solid var(--cosmic-border); border-radius: 1.1rem; background: rgb(248 249 254 / .85); backdrop-filter: blur(20px); box-shadow: 0 10px 35px -20px rgb(0 0 0 / .25); }
+  :global(.dark) .nav-shell { background: rgb(9 13 27 / .86); }
+  .nav-brand { display: inline-flex; align-items: center; gap: .55rem; flex-shrink: 0; font: 600 .82rem/1 ui-monospace, monospace; letter-spacing: -.03em; }
+  .nav-brand :global(svg) { color: var(--cosmic-accent); }
+  .brand-suffix { color: var(--cosmic-soft); font-weight: 400; }
+  nav { display: flex; align-items: center; gap: .15rem; }
+  nav a { display: inline-flex; align-items: center; gap: .5rem; border-radius: .65rem; padding: .65rem .8rem; color: var(--cosmic-muted); font-size: .79rem; transition: color .2s, background .2s; }
+  nav a:hover, nav a[aria-current] { color: var(--cosmic-accent); background: rgb(249 115 22 / .07); }
+  .nav-number { display: none; }
+  .nav-controls { display: flex; align-items: center; gap: .3rem; }
+  .theme-toggle, .menu-toggle { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; flex-shrink: 0; border: 1px solid var(--cosmic-border); border-radius: .7rem; color: var(--cosmic-muted); background: var(--cosmic-chip); transition: color .2s, border-color .2s; }
+  .theme-toggle:hover, .menu-toggle:hover { color: var(--cosmic-accent); border-color: var(--cosmic-accent); }
+  .theme-toggle { display: none; }
+  [data-menu-ready] .theme-toggle { display: grid; }
+  .theme-toggle :global(.sun-icon) { display: none; }
+  :global(.dark) .theme-toggle :global(.sun-icon) { display: block; }
+  :global(.dark) .theme-toggle :global(.moon-icon) { display: none; }
+  .menu-toggle { display: none; }
+  .menu-toggle :global(.close-icon) { display: none; }
+  @media (max-width: 850px) {
+    .nav-shell { gap: .75rem; }
+    nav a { padding-inline: .55rem; font-size: .73rem; }
+    .brand-suffix { display: none; }
   }
+  @media (max-width: 640px) {
+    .site-header { top: .75rem; }
+    .nav-shell { min-height: 3.75rem; flex-wrap: wrap; padding: .55rem .65rem .55rem .9rem; }
+    .nav-controls { margin-left: auto; }
+    nav { flex-basis: 100%; flex-wrap: wrap; order: 3; }
+    nav a { font-size: .8rem; }
+    [data-menu-ready] nav { display: none; position: absolute; inset-inline: 0; top: calc(100% + .6rem); padding: .65rem; border: 1px solid var(--cosmic-border); border-radius: 1rem; background: var(--cosmic-bg); box-shadow: 0 12px 32px rgb(0 0 0 / .15); }
+    [data-menu-ready][data-menu-open="true"] nav { display: grid; grid-template-columns: 1fr 1fr; gap: .25rem; }
+    [data-menu-ready] nav a { padding: .85rem .7rem; }
+    .nav-number { display: inline; color: var(--cosmic-soft); font: .6rem ui-monospace, monospace; }
+    [data-menu-ready] .menu-toggle { display: grid; }
+    [data-menu-open="true"] .menu-toggle :global(.menu-icon) { display: none; }
+    [data-menu-open="true"] .menu-toggle :global(.close-icon) { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) { nav a, .theme-toggle, .menu-toggle { transition: none; } }
 </style>

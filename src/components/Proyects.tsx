@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useSyncExternalStore } from "react";
 import { ArrowUpRight, Building2, CodeXml, GithubIcon, UserRound } from "lucide-react";
 import {
@@ -9,26 +9,6 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { PATH_ICON, PROJECT, TECH_LABELS } from "@/consts/projects.const";
-
-const listVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 0.08,
-      staggerChildren: 0.11,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 54, scale: 0.965 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-  },
-};
 
 const desktopQuery = "(min-width: 1024px)";
 const subscribeToDesktop = (onChange: () => void) => {
@@ -50,28 +30,17 @@ export const TextParallaxContentExample = () => {
 
   return (
     <div>
-      <header className="mb-8 flex flex-col items-start justify-between gap-4 md:mb-10 md:flex-row md:items-end">
+      <header className="cosmic-heading">
         <div>
-          <span className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-orange-400">
-            Selección de trabajo
-          </span>
-          <h2 className="mt-2 flex items-center gap-3 text-4xl font-bold tracking-[-0.045em] text-black/80 dark:text-white md:text-5xl">
-            <CodeXml className="size-8" />
-            Proyectos
-          </h2>
+          <span className="cosmic-kicker"><span className="cosmic-sector">04 /</span>Misiones construidas</span>
+          <h2 className="cosmic-title"><CodeXml aria-hidden="true" />Proyectos</h2>
+          <p className="cosmic-caption">Productos, herramientas y sistemas que he diseñado y construido de punta a punta.</p>
         </div>
-        <p className="max-w-lg leading-7 text-gray-600 dark:text-gray-300">
-          Productos, herramientas y sistemas que he diseñado y construido de punta a punta.
-        </p>
+        <div className="cosmic-heading-extra"><span className="cosmic-marker">SECTOR / 04</span></div>
       </header>
 
       <motion.section
         className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2"
-        variants={listVariants}
-        initial={reduceMotion ? false : "hidden"}
-        animate={reduceMotion ? "visible" : undefined}
-        whileInView={reduceMotion ? undefined : "visible"}
-        viewport={{ once: true, amount: 0.04 }}
       >
         {columns.map((column) => (
           <div key={column} className={isDesktop ? "flex min-w-0 flex-col gap-6" : "contents"}>
@@ -79,18 +48,17 @@ export const TextParallaxContentExample = () => {
               <motion.article
                 key={project.title}
                 style={{ order: index }}
-                variants={cardVariants}
-                whileHover={reduceMotion ? undefined : { y: -8, scale: 1.006 }}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
                 transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                className="project-card group flex w-full min-w-0 flex-col overflow-hidden rounded-[1.6rem] border border-black/10 bg-white/75 shadow-[0_20px_60px_-46px_rgba(15,23,42,.55)] backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-orange-400/40 hover:shadow-[0_28px_80px_-42px_rgba(249,115,22,.38)] dark:border-white/10 dark:bg-slate-950/75"
+                className="project-card cosmic-panel group flex w-full min-w-0 flex-col"
               >
                 <ProjectGallery images={project.imgURl} title={project.title} />
 
-                <div className="flex flex-1 flex-col p-5 md:p-7">
+                <div className="project-body flex flex-1 flex-col">
                   <div className="mb-4 flex items-start justify-between gap-4">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-[11px] font-medium tracking-[.12em] text-orange-400">
+                        <span className="font-mono text-[11px] font-medium tracking-[.12em] text-orange-700 dark:text-orange-400">
                           PRJ / {String(index + 1).padStart(2, "0")}
                         </span>
                         <span
@@ -147,7 +115,7 @@ export const TextParallaxContentExample = () => {
                         <li
                           key={tech}
                           title={TECH_LABELS[tech] ?? tech}
-                          className="inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-black/10 bg-black/[.025] px-2.5 align-middle text-xs font-medium leading-none text-gray-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-400/40 hover:bg-orange-400/10 dark:border-white/10 dark:bg-white/[.04] dark:text-gray-300"
+                          className="cosmic-chip project-tech"
                         >
                           <img
                             src={`${PATH_ICON}${tech}.svg`}
@@ -249,7 +217,7 @@ const ProjectLink = ({ href, label, icon }: ProjectLinkProps) => (
     href={href}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-2 rounded-full border border-black/10 px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-400/50 hover:bg-orange-400/10 hover:text-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 dark:border-white/10 dark:text-gray-200 dark:hover:text-orange-300"
+    className="cosmic-button project-action"
   >
     {icon === "github" ? <GithubIcon className="size-4" /> : <ArrowUpRight className="size-4" />}
     {label}

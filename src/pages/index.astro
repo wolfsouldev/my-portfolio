@@ -4,100 +4,20 @@ import "@/global.css";
 import Header from "@/components/Header.astro";
 import SectionContainer from "@/container/SectionContainer.astro";
 import Hero from "@/components/Hero.astro";
-import Animation from "@/components/Animation.astro";
-import { OrbitingCirclesDemo } from "@/components/Orbital";
 import Experience from "@/components/Experience.astro";
 import AboutMe from "@/components/AboutMe.astro";
 import Skills from "@/components/Skills.astro";
-import Star from "@/container/Satrs.astro";
+import Contact from "@/components/Contact.astro";
 import { TextParallaxContentExample } from "@/components/Proyects";
 ---
-
-<Layout title="Alejandro Porfolio">
+<Layout title="Alejandro Fajardo · Software Engineer">
   <Header />
-  <main
-    class="flex flex-col gap-y-10 w-full h-full my-auto py-32 overflow-x-hidden"
-  >
-    <Star  />
-    <SectionContainer
-      class="flex gap-x-15 justify-center items-center mb-12 sm:mb-5"
-      id=""
-      animated={false}
-    >
-      <Hero />
-      <OrbitingCirclesDemo>
-        <Animation />
-      </OrbitingCirclesDemo>
-    </SectionContainer>
-
-    <SectionContainer id="experiencia">
-      <Experience />
-    </SectionContainer>
-
-    <SectionContainer id="skills">
-      <Skills />
-    </SectionContainer>
-
-    <SectionContainer id="sobre-mi">
-      <AboutMe />
-    </SectionContainer>
-
-    <SectionContainer id="proyectos">
-      <TextParallaxContentExample client:load />
-    </SectionContainer>
+  <main id="contenido" class="portfolio-main" tabindex="-1">
+    <SectionContainer id="inicio"><Hero /></SectionContainer>
+    <SectionContainer id="experiencia"><Experience /></SectionContainer>
+    <SectionContainer id="skills"><Skills /></SectionContainer>
+    <SectionContainer id="sobre-mi"><AboutMe /></SectionContainer>
+    <SectionContainer id="proyectos"><TextParallaxContentExample client:load /></SectionContainer>
+    <SectionContainer id="contacto"><Contact /></SectionContainer>
   </main>
 </Layout>
-
-<script is:inline>
-  const getThemePreference = () => {
-    localStorage.setItem("theme", "dark");
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-  if (typeof localStorage !== "undefined") {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  }
-</script>
-
-<style is:global>
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* ::view-transition-new(root) {
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>')
-    center / 0 no-repeat;
-  animation: scale 0.1s;
-  z-index: 500;
-  position: relative;
-}
-
-::view-transition-old(root),
-.dark::view-transition-old(root) {
-  animation: none;
-  z-index: 100;
-}
-.dark::view-transition-new(root) {
-  animation: scale 0.1s;
-}
-
-@keyframes scale {
-  to {
-    mask-size: 200vmax;
-  }
-} */
-</style>

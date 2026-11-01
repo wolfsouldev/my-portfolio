@@ -1,0 +1,46 @@
+---
+import { ArrowUp, ArrowUpRight, Github, Linkedin, Mail, Radio, Send } from "lucide-react";
+import SectionHeading from "./SectionHeading.astro";
+---
+<SectionHeading index="05" kicker="Abriendo canal" title="Contacto" description="Las buenas ideas empiezan con una conversación.">
+  <Radio slot="icon" aria-hidden="true" />
+</SectionHeading>
+<div class="contact-card cosmic-panel" data-reveal>
+  <div class="contact-copy">
+    <span class="contact-signal"><span></span> Listo para conectar ideas</span>
+    <h3>¿Tu próxima idea?<br /><span>Vamos a ponerla en órbita.</span></h3>
+    <p>Cuéntame qué estás construyendo. Hablemos de código, arquitectura y de cómo hacer realidad tu próximo proyecto.</p>
+    <a class="cosmic-button cosmic-button--primary" href="mailto:alejandrodev01@gmail.com"><Mail aria-hidden="true" /> Escribirme un correo <ArrowUpRight aria-hidden="true" /></a>
+    <a class="contact-email" href="mailto:alejandrodev01@gmail.com">alejandrodev01@gmail.com</a>
+  </div>
+  <div class="contact-visual" aria-hidden="true"><span class="transmission-ring ring-one"></span><span class="transmission-ring ring-two"></span><span class="transmission-ring ring-three"></span><span class="transmission-core"><Send size={35} /></span><span class="contact-star">✦</span></div>
+  <div class="contact-links"><span>También en</span><a href="https://github.com/wolfsouldev" target="_blank" rel="noopener noreferrer"><Github size={15} aria-hidden="true" /> GitHub <ArrowUpRight size={12} aria-hidden="true" /></a><a href="https://www.linkedin.com/in/alejandro-fajardo-1548a0245/" target="_blank" rel="noopener noreferrer"><Linkedin size={15} aria-hidden="true" /> LinkedIn <ArrowUpRight size={12} aria-hidden="true" /></a></div>
+</div>
+<footer class="site-footer"><a class="footer-brand" href="#inicio">AF <span>/ Software Engineer</span></a><span>Diseñado para seguir explorando.</span><a class="back-top" href="#inicio">Volver al inicio <ArrowUp size={13} aria-hidden="true" /></a></footer>
+<style>
+  .contact-card { display: grid; grid-template-columns: 1.4fr .6fr; align-items: center; gap: 2rem; padding: var(--panel-padding-large); }
+  .contact-signal { display: flex; align-items: center; gap: .5rem; color: var(--cosmic-soft); font: .63rem/1.5 ui-monospace, monospace; }
+  .contact-signal > span { width: 5px; height: 5px; border-radius: 50%; background: var(--cosmic-violet); box-shadow: 0 0 10px rgb(139 92 246 / .5); }
+  h3 { margin-top: 1rem; font-size: clamp(1.8rem, 3.2vw, 2.9rem); line-height: 1.17; font-weight: 650; letter-spacing: -.045em; }
+  h3 > span { color: var(--cosmic-accent); }
+  .contact-copy > p { max-width: 30rem; margin: 1.3rem 0 1.6rem; color: var(--cosmic-muted); font-size: .92rem; line-height: 1.85; }
+  .contact-email { display: block; width: fit-content; max-width: 100%; margin-top: .85rem; overflow-wrap: anywhere; color: var(--cosmic-soft); font: .68rem/1.5 ui-monospace, monospace; }
+  .contact-email:hover { color: var(--cosmic-accent); }
+  .contact-visual { position: relative; width: 100%; max-width: 260px; aspect-ratio: 1; justify-self: center; }
+  .transmission-ring { position: absolute; border: 1px solid var(--cosmic-border); border-radius: 50%; }
+  .ring-one { inset: 3%; border-style: dashed; }.ring-two { inset: 18%; }.ring-three { inset: 32%; border-color: rgb(249 115 22 / .25); }
+  .ring-two::after { content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; top: 2px; left: 32%; background: var(--cosmic-violet); box-shadow: 0 0 15px rgb(139 92 246 / .6); }
+  .transmission-core { position: absolute; inset: 34%; display: grid; place-items: center; color: var(--cosmic-accent); border-radius: 50%; background: rgb(249 115 22 / .07); box-shadow: 0 0 35px rgb(249 115 22 / .05); transition: transform .4s ease; }
+  .contact-card:hover .transmission-core { transform: translate(4px, -4px); }
+  .contact-star { position: absolute; bottom: 14%; right: 15%; color: var(--cosmic-accent); }
+  .contact-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; grid-column: 1 / -1; padding-top: 1.25rem; border-top: 1px solid var(--cosmic-border); }
+  .contact-links > span { color: var(--cosmic-soft); font: .64rem/1.5 ui-monospace, monospace; }
+  .contact-links a { display: inline-flex; align-items: center; gap: .5rem; color: var(--cosmic-muted); font-size: .75rem; }
+  .contact-links a:hover { color: var(--cosmic-accent); }
+  .site-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; padding-top: 1.75rem; margin-top: 2rem; color: var(--cosmic-soft); font: .62rem/1.5 ui-monospace, monospace; }
+  .footer-brand { color: var(--cosmic-accent); font-weight: 600; }.footer-brand > span { color: var(--cosmic-soft); font-weight: 400; }
+  .back-top { display: inline-flex; align-items: center; gap: .5rem; }
+  .back-top:hover { color: var(--cosmic-accent); }
+  @media (max-width: 650px) { .contact-card { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } .contact-visual { display: none; } .site-footer { align-items: start; flex-direction: column; gap: .85rem; } }
+  @media (prefers-reduced-motion: reduce) { .transmission-core { transition: none; } .contact-card:hover .transmission-core { transform: none; } }
+</style>

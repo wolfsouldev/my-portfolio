@@ -1,9 +1,9 @@
-<div
-  class="absolute top-0 bottom-0 z-[-1] min-h-screen w-full bg-gray-50 dark:bg-gray-950
-      bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
-      dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
->
-</div>
-
-
-<div class="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
+<div class="space-backdrop" aria-hidden="true"><span></span></div>
+<style>
+  .space-backdrop { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; background: var(--cosmic-bg); }
+  .space-backdrop::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 8%, rgb(139 92 246 / .08), transparent 42%), radial-gradient(ellipse at 8% 60%, rgb(249 115 22 / .035), transparent 35%); }
+  .space-backdrop span { position: absolute; inset: 0; opacity: .25; background-image: radial-gradient(1px 1px at 21px 31px, #7c6cab 70%, transparent), radial-gradient(1px 1px at 143px 121px, #7c6cab 70%, transparent), radial-gradient(1px 1px at 82px 195px, #7c6cab 70%, transparent); background-size: 251px 233px, 373px 317px, 463px 409px; }
+  :global(.dark) .space-backdrop::before { background: radial-gradient(ellipse at 80% 8%, rgb(76 29 149 / .16), transparent 42%), radial-gradient(ellipse at 8% 60%, rgb(124 45 18 / .07), transparent 35%); }
+  :global(.dark) .space-backdrop span { opacity: .4; background-image: radial-gradient(1px 1px at 21px 31px, #b9b1d6 70%, transparent), radial-gradient(1px 1px at 143px 121px, #b9b1d6 70%, transparent), radial-gradient(1px 1px at 82px 195px, #b9b1d6 70%, transparent); }
+  :global(body) { isolation: isolate; }
+</style>

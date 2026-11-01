@@ -2,8 +2,11 @@
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "./Stars-background";
 ---
-
-<div class="max-w-full max-h-full ">
+<div class="sky-effects" aria-hidden="true">
   <ShootingStars client:load />
-  <StarsBackground client:load />
+  <StarsBackground client:load starDensity={0.00009} allStarsTwinkle={false} twinkleProbability={0.2} minTwinkleSpeed={3} maxTwinkleSpeed={6} />
 </div>
+<style>
+  .sky-effects { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: .7; }
+  @media (prefers-reduced-motion: reduce) { .sky-effects { display: none; } }
+</style>

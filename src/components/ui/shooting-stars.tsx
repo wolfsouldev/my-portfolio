@@ -26,17 +26,18 @@ interface ShootingStarsProps {
 
 const getRandomStartPoint = () => {
   const side = Math.floor(Math.random() * 4);
-  const offset = Math.random() * window.innerWidth;
+  const horizontalOffset = Math.random() * window.innerWidth;
+  const verticalOffset = Math.random() * window.innerHeight;
 
   switch (side) {
     case 0:
-      return { x: offset, y: 0, angle: 45 };
+      return { x: horizontalOffset, y: 0, angle: 45 };
     case 1:
-      return { x: window.innerWidth, y: offset, angle: 135 };
+      return { x: window.innerWidth, y: verticalOffset, angle: 135 };
     case 2:
-      return { x: offset, y: window.innerHeight, angle: 225 };
+      return { x: horizontalOffset, y: window.innerHeight, angle: 225 };
     case 3:
-      return { x: 0, y: offset, angle: 315 };
+      return { x: 0, y: verticalOffset, angle: 315 };
     default:
       return { x: 0, y: 0, angle: 45 };
   }
@@ -56,7 +57,10 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timeout: ReturnType<typeof setTimeout> | undefined;
     const createStar = () => {
+      if (preference.matches || document.hidden) return;
       const { x, y, angle } = getRandomStartPoint();
       const newStar: ShootingStar = {
         id: Date.now(),
@@ -70,12 +74,22 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
       setStar(newStar);
 
       const randomDelay = Math.random() * (maxDelay - minDelay) + minDelay;
-      setTimeout(createStar, randomDelay);
+      timeout = setTimeout(createStar, randomDelay);
     };
 
-    createStar();
-
-    return () => {};
+    const restart = () => {
+      clearTimeout(timeout);
+      setStar(null);
+      if (!preference.matches && !document.hidden) createStar();
+    };
+    restart();
+    preference.addEventListener("change", restart);
+    document.addEventListener("visibilitychange", restart);
+    return () => {
+      clearTimeout(timeout);
+      preference.removeEventListener("change", restart);
+      document.removeEventListener("visibilitychange", restart);
+    };
   }, [minSpeed, maxSpeed, minDelay, maxDelay]);
 
   useEffect(() => {

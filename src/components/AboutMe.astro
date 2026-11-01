@@ -1,30 +1,22 @@
 ---
-import { MapPin, User } from "lucide-react";
+import { MapPin, UserRound, Orbit } from "lucide-react";
+
+import SectionHeading from "./SectionHeading.astro";
 
 const personalImageAlt = "Alejandro Alberto Fajardo";
 ---
 
 <div class="about-shell">
-  <header class="about-heading">
-    <div>
-      <span>Perfil</span>
-      <h2><User className="size-8" /> Sobre mí</h2>
-    </div>
-    <p>Backend first · Full-stack cuando el producto lo necesita</p>
-  </header>
-
-  <article class="about-card">
-    <figure>
-      <img
-        width="520"
-        height="520"
-        src="/me_.jpg"
-        alt={personalImageAlt}
-        loading="lazy"
-      />
-      <figcaption><MapPin className="size-4" /> Cuba · Disponible en remoto</figcaption>
-    </figure>
-
+  <SectionHeading index="03" kicker="Detrás del código" title="Sobre mí" description="Backend first · Full-stack cuando el producto lo necesita.">
+    <UserRound slot="icon" aria-hidden="true" />
+  </SectionHeading>
+  <div class="about-grid">
+  <figure class="portrait cosmic-panel" data-reveal>
+    <span class="portrait-id" aria-hidden="true"><Orbit size={14} /> ID / AF</span>
+    <img width="520" height="520" src="/me_.jpg" alt={personalImageAlt} loading="lazy" />
+    <figcaption><MapPin size={14} aria-hidden="true" /> Cuba · Disponible en remoto</figcaption>
+  </figure>
+  <article class="about-card cosmic-panel" data-reveal>
     <div class="about-copy">
       <p class="about-lead">
         Construyo software que se mantiene sólido cuando el producto empieza a crecer.
@@ -43,39 +35,30 @@ const personalImageAlt = "Alejandro Alberto Fajardo";
         </p>
       </div>
       <ul aria-label="Áreas de especialización">
-        <li>Arquitectura</li>
-        <li>Microservicios</li>
-        <li>Cloud</li>
-        <li>Producto</li>
+        <li class="cosmic-chip">Arquitectura</li>
+        <li class="cosmic-chip">Microservicios</li>
+        <li class="cosmic-chip">Cloud</li>
+        <li class="cosmic-chip">Producto</li>
       </ul>
     </div>
   </article>
+  </div>
 </div>
 
 <style>
-  .about-shell { padding: 1rem 0; }
-  .about-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
-  .about-heading span { color: rgb(251 146 60); font: 600 .72rem/1 ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; }
-  .about-heading h2 { display: flex; align-items: center; gap: .75rem; margin-top: .45rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -.045em; }
-  .about-heading > p { color: rgb(107 114 128); font-size: .88rem; }
-  :global(.dark) .about-heading > p { color: rgb(156 163 175); }
-  .about-card { display: grid; grid-template-columns: minmax(16rem, .72fr) 1.28fr; overflow: hidden; border: 1px solid rgb(0 0 0 / .09); border-radius: 1.75rem; background: rgb(255 255 255 / .58); }
-  :global(.dark) .about-card { border-color: rgb(255 255 255 / .1); background: rgb(10 15 28 / .68); }
-  figure { position: relative; min-height: 31rem; overflow: hidden; }
-  figure::after { position: absolute; inset: 0; background: linear-gradient(to top, rgb(2 6 23 / .72), transparent 50%); content: ""; }
-  figure img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s cubic-bezier(.22,1,.36,1); }
-  .about-card:hover figure img { transform: scale(1.035); }
-  figcaption { position: absolute; z-index: 1; bottom: 1.25rem; left: 1.25rem; display: flex; align-items: center; gap: .5rem; color: white; font: 500 .75rem/1 ui-monospace, monospace; }
-  .about-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 4.5rem); }
-  .about-lead { max-width: 36rem; margin-bottom: 2rem; font-size: clamp(1.65rem, 3vw, 2.65rem); font-weight: 650; line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
-  .about-copy > div { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; color: rgb(75 85 99); font-size: .94rem; line-height: 1.75; }
-  :global(.dark) .about-copy > div { color: rgb(209 213 219); }
-  .about-copy strong { color: rgb(234 88 12); font-weight: 600; }
-  :global(.dark) .about-copy strong { color: rgb(253 186 116); }
-  .about-copy ul { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgb(0 0 0 / .09); }
-  :global(.dark) .about-copy ul { border-color: rgb(255 255 255 / .1); }
-  .about-copy li { border-radius: 999px; padding: .45rem .75rem; color: rgb(107 114 128); background: rgb(0 0 0 / .04); font: 500 .72rem/1 ui-monospace, monospace; }
-  :global(.dark) .about-copy li { color: rgb(209 213 219); background: rgb(255 255 255 / .055); }
-  @media (max-width: 800px) { .about-heading { align-items: start; flex-direction: column; gap: .75rem; } .about-card { grid-template-columns: 1fr; } figure { min-height: 24rem; } .about-copy > div { grid-template-columns: 1fr; } }
-  @media (prefers-reduced-motion: reduce) { figure img { transition: none; } }
+  .about-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 1.5rem; }
+  .portrait { position: relative; min-height: 30rem; }
+  .portrait::after { inset: 0; height: auto; background: linear-gradient(to top, rgb(2 6 23 / .9), transparent 45%); }
+  .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .portrait:hover img { transform: scale(1.035); }
+  .portrait-id { position: absolute; top: 1.1rem; left: 1.1rem; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .65rem; border: 1px solid rgb(255 255 255 / .2); border-radius: .5rem; color: white; background: rgb(6 10 23 / .45); backdrop-filter: blur(8px); font: .62rem/1 ui-monospace, monospace; }
+  figcaption { position: absolute; z-index: 2; bottom: 1.25rem; inset-inline: 1.1rem; display: flex; align-items: center; gap: .5rem; color: white; font: 500 .67rem/1.5 ui-monospace, monospace; }
+  figcaption :global(svg) { flex-shrink: 0; color: #fdba74; }
+  .about-copy { padding: var(--panel-padding-large); }
+  .about-lead { margin-bottom: 1.5rem; color: var(--cosmic-text); font-size: clamp(1.6rem, 2.5vw, 2.3rem); font-weight: 650; line-height: 1.2; letter-spacing: -.04em; text-wrap: balance; }
+  .about-copy > div { display: grid; gap: 1rem; color: var(--cosmic-muted); font-size: .92rem; line-height: 1.85; }
+  .about-copy strong { color: var(--cosmic-accent); font-weight: 600; }
+  .about-copy ul { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.6rem; padding-top: 1.25rem; border-top: 1px solid var(--cosmic-border); }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: minmax(0, 1fr); } .portrait { min-height: 0; width: 100%; aspect-ratio: 5 / 4; } .portrait img { object-position: center 35%; } }
+  @media (prefers-reduced-motion: reduce) { .portrait img { transition: none; } .portrait:hover img { transform: none; } }
 </style>
