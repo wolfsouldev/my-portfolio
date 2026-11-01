@@ -22,7 +22,7 @@ const { class: className, id, animated = true } = Astro.props;
         duration: 0.72,
         ease: [0.22, 1, 0.36, 1],
       }}
-      viewport={{ once: true, amount: 0.12 }}
+      viewport={{ once: true, amount: id === "proyectos" ? "some" : 0.12 }}
       client:visible
     >
       <slot />
