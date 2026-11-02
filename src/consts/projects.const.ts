@@ -72,7 +72,10 @@ type Project = {
   category: "empresa" | "personal";
   desc: string;
   link?: string;
+  site?: string;
   demo?: string;
+  demoLabel?: string;
+  featured?: boolean;
   tech: string[];
   active: boolean;
   role?: string;
@@ -186,8 +189,11 @@ export const PROJECT: Project[] = [
     category: "personal",
     desc: "“Jerry’s Pixel Icons es una extensión para Visual Studio Code que reemplaza los iconos del explorador de archivos por un set en estilo pixel-art, aportando un toque divertido y retro a tu editor. Fácil de activar y personalizar.",
     link: "https://github.com/wolfsouldev/jerrys-pixel-icons",
+    site: "https://wolfsouldev.github.io/jerrys-pixel-icons/",
     demo: "https://marketplace.visualstudio.com/items?itemName=MelissaGutierrez.jerrys-pixel-icons&ssr=false#overview",
+    demoLabel: "Marketplace",
     tech: [Icons.typescript, Icons.javascript, Icons.vscode],
+    featured: true,
     active: true,
   },
   // Agency Go

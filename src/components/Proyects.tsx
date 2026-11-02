@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useSyncExternalStore } from "react";
-import { ArrowUpRight, Building2, CodeXml, GithubIcon, UserRound } from "lucide-react";
+import { ArrowUpRight, Building2, CodeXml, GithubIcon, Star, UserRound } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -24,7 +24,9 @@ export const TextParallaxContentExample = () => {
     () => window.matchMedia(desktopQuery).matches,
     () => false,
   );
-  const projects = PROJECT.filter((item) => item.active);
+  const projects = PROJECT.filter((item) => item.active).sort(
+    (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+  );
   // Independent columns on desktop; original DOM and keyboard order on mobile.
   const columns = isDesktop ? [0, 1] : [0];
 
@@ -61,6 +63,12 @@ export const TextParallaxContentExample = () => {
                         <span className="font-mono text-[11px] font-medium tracking-[.12em] text-orange-700 dark:text-orange-400">
                           PRJ / {String(index + 1).padStart(2, "0")}
                         </span>
+                        {project.featured ? (
+                          <span className="inline-flex h-6 items-center justify-center gap-1.5 rounded-full border border-amber-500/35 bg-amber-400/15 px-2.5 font-mono text-[10px] font-semibold uppercase leading-none tracking-[.08em] text-amber-800 dark:text-amber-300">
+                            <Star className="block size-3.5 shrink-0 fill-current" aria-hidden="true" />
+                            <span>Proyecto principal</span>
+                          </span>
+                        ) : null}
                         <span
                           className={`project-category inline-flex h-6 items-center justify-center gap-1.5 rounded-full border px-2.5 align-middle font-mono text-[10px] font-semibold uppercase leading-none tracking-[.08em] ${
                             project.category === "empresa"
@@ -128,13 +136,16 @@ export const TextParallaxContentExample = () => {
                       ))}
                     </ul>
 
-                    {(project.link || project.demo) ? (
+                    {(project.link || project.site || project.demo) ? (
                       <div className="project-links mt-5 flex min-h-16 flex-wrap items-start gap-3 border-t border-black/10 pt-5 dark:border-white/10">
                         {project.link ? (
                           <ProjectLink href={project.link} label="Código" icon="github" />
                         ) : null}
                         {project.demo ? (
-                          <ProjectLink href={project.demo} label="Ver proyecto" icon="external" />
+                          <ProjectLink href={project.demo} label={project.demoLabel ?? "Ver proyecto"} icon="external" />
+                        ) : null}
+                        {project.site ? (
+                          <ProjectLink href={project.site} label="Ver página" icon="external" />
                         ) : null}
                       </div>
                     ) : (
