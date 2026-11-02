@@ -1,5 +1,5 @@
 ---
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, Orbit } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Download, Github, Linkedin, Mail, Orbit } from "lucide-react";
 import HeroOrbit from "./HeroOrbit.astro";
 ---
 <div class="hero-grid">
@@ -10,7 +10,7 @@ import HeroOrbit from "./HeroOrbit.astro";
     <p class="hero-lead">Ideas que despegan.<br />Software que se mantiene sólido.</p>
     <p class="hero-description">Ingeniero de software especializado en desarrollo backend, arquitecturas de microservicios y aplicaciones web. Conecto las piezas para convertir ideas en productos que pueden crecer.</p>
     <div class="hero-actions"><a class="cosmic-button cosmic-button--primary" href="#proyectos">Explorar proyectos <ArrowDownRight aria-hidden="true" /></a><a class="cosmic-button" href="mailto:alejandrodev01@gmail.com"><Mail aria-hidden="true" /> Hablemos</a></div>
-    <div class="hero-socials"><a href="https://github.com/wolfsouldev" target="_blank" rel="noopener noreferrer"><Github size={15} aria-hidden="true" /> GitHub <ArrowUpRight size={12} aria-hidden="true" /></a><a href="https://www.linkedin.com/in/alejandro-fajardo-1548a0245/" target="_blank" rel="noopener noreferrer"><Linkedin size={15} aria-hidden="true" /> LinkedIn <ArrowUpRight size={12} aria-hidden="true" /></a></div>
+    <div class="hero-socials"><a href="https://github.com/wolfsouldev" target="_blank" rel="noopener noreferrer"><Github size={15} aria-hidden="true" /> GitHub <ArrowUpRight size={12} aria-hidden="true" /></a><a href="https://www.linkedin.com/in/alejandro-fajardo-1548a0245/" target="_blank" rel="noopener noreferrer"><Linkedin size={15} aria-hidden="true" /> LinkedIn <ArrowUpRight size={12} aria-hidden="true" /></a><a href="/docs/alejandro-fajardo-cv.pdf" download="Alejandro-Fajardo-CV.pdf"><Download size={15} aria-hidden="true" /> Descargar CV</a></div>
   </div>
   <div class="hero-visual" data-reveal><HeroOrbit /></div>
 </div>
@@ -28,7 +28,7 @@ import HeroOrbit from "./HeroOrbit.astro";
   .hero-lead { margin-top: 1.5rem; color: var(--cosmic-text); font-size: clamp(1.15rem, 2.3vw, 1.6rem); font-weight: 500; line-height: 1.45; letter-spacing: -.025em; }
   .hero-description { max-width: 32rem; margin-top: 1rem; color: var(--cosmic-muted); font-size: .94rem; line-height: 1.85; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.75rem; }
-  .hero-socials { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.5rem; }
+  .hero-socials { display: flex; align-items: center; flex-wrap: wrap; gap: .85rem 1.5rem; margin-top: 1.5rem; }
   .hero-socials a { display: inline-flex; align-items: center; gap: .45rem; color: var(--cosmic-soft); font-size: .73rem; transition: color .2s; }
   .hero-socials a:hover { color: var(--cosmic-accent); }
   .hero-visual { min-width: 0; }

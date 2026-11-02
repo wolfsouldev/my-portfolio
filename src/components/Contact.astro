@@ -1,5 +1,5 @@
 ---
-import { ArrowUp, ArrowUpRight, Github, Linkedin, Mail, Radio, Send } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Github, Linkedin, Mail, Radio, Send } from "lucide-react";
 import SectionHeading from "./SectionHeading.astro";
 ---
 <SectionHeading index="05" kicker="Abriendo canal" title="Contacto" description="Las buenas ideas empiezan con una conversación.">
@@ -10,7 +10,10 @@ import SectionHeading from "./SectionHeading.astro";
     <span class="contact-signal"><span></span> Listo para conectar ideas</span>
     <h3>¿Tu próxima idea?<br /><span>Vamos a ponerla en órbita.</span></h3>
     <p>Cuéntame qué estás construyendo. Hablemos de código, arquitectura y de cómo hacer realidad tu próximo proyecto.</p>
-    <a class="cosmic-button cosmic-button--primary" href="mailto:alejandrodev01@gmail.com"><Mail aria-hidden="true" /> Escribirme un correo <ArrowUpRight aria-hidden="true" /></a>
+    <div class="contact-actions">
+      <a class="cosmic-button cosmic-button--primary" href="mailto:alejandrodev01@gmail.com"><Mail aria-hidden="true" /> Escribirme un correo <ArrowUpRight aria-hidden="true" /></a>
+      <a class="cosmic-button" href="/docs/alejandro-fajardo-cv.pdf" download="Alejandro-Fajardo-CV.pdf"><Download aria-hidden="true" /> Descargar CV</a>
+    </div>
     <a class="contact-email" href="mailto:alejandrodev01@gmail.com">alejandrodev01@gmail.com</a>
   </div>
   <div class="contact-visual" aria-hidden="true"><span class="transmission-ring ring-one"></span><span class="transmission-ring ring-two"></span><span class="transmission-ring ring-three"></span><span class="transmission-core"><Send size={35} /></span><span class="contact-star">✦</span></div>
@@ -25,6 +28,7 @@ import SectionHeading from "./SectionHeading.astro";
   h3 > span { color: var(--cosmic-accent); }
   .contact-copy > p { max-width: 30rem; margin: 1.3rem 0 1.6rem; color: var(--cosmic-muted); font-size: .92rem; line-height: 1.85; }
   .contact-email { display: block; width: fit-content; max-width: 100%; margin-top: .85rem; overflow-wrap: anywhere; color: var(--cosmic-soft); font: .68rem/1.5 ui-monospace, monospace; }
+  .contact-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; }
   .contact-email:hover { color: var(--cosmic-accent); }
   .contact-visual { position: relative; width: 100%; max-width: 260px; aspect-ratio: 1; justify-self: center; }
   .transmission-ring { position: absolute; border: 1px solid var(--cosmic-border); border-radius: 50%; }
